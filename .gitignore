@@ -25,3 +25,5 @@
 
 .rbenv-gemsets
 examples.txt
+whitelist.yml
+grades.yml
