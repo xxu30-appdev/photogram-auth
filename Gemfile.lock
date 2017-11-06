@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/firstdraft/dev_toolbar.git
-  revision: 6a1ae2e4e1a3dfdfd867e0bcb3f2c465ebacc19a
+  revision: f9745615dc922c3e8471b27fd1826415dd12cfd8
   specs:
     dev_toolbar (0.1.0)
       better_errors
