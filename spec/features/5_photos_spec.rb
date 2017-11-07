@@ -2,7 +2,7 @@ require "rails_helper"
 
 feature "Photos:" do
 
-  context "photos show page" do
+  context "index page" do
     before(:each) do
       @user_1 = FactoryGirl.create(:user, :username => "1", :email => "1@m.com")
       @user_2 = FactoryGirl.create(:user, :username => "2", :email => "2@m.com")
