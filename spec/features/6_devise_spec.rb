@@ -1,9 +1,6 @@
 require "rails_helper"
 
-show_tests_in_browser = true
-do_not_show_tests_in_browser = false
-
-feature "Devise:", js: do_not_show_tests_in_browser do
+feature "Devise:" do
 
   scenario "sign-up form has username field", points: 1, hint: h("label_for_input") do
     visit "/users/sign_up"

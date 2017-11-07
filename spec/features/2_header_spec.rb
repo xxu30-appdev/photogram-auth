@@ -1,9 +1,6 @@
 require "rails_helper"
 
-show_tests_in_browser = true
-do_not_show_tests_in_browser = false
-
-feature "Header:", js: do_not_show_tests_in_browser do
+feature "Header:" do
 
   scenario "edit profile link is just username", points: 2 do
     user = FactoryGirl.create(:user)
@@ -23,19 +20,25 @@ feature "Header:", js: do_not_show_tests_in_browser do
     visit "/"
 
     within("nav") {
-      expect(page).to have_link(nil, href: "/users/sign_out")
-      expect(page).not_to have_link("Dummy Sign Out Link")
+      expect(find(:xpath, "//a[@href='/users/sign_out']").text).not_to eq("Dummy Sign Out Link")
     }
   end
 
-  scenario "if logged out, sign-up/sign-in instead of sign-out/edit", points: 2 do
+  scenario "if logged out, sign-up/sign-in should present", points: 1 do
+    visit "/"
+
+    within("nav") {
+      expect(page).to have_link(nil, href: "/users/sign_up")
+      expect(page).to have_link(nil, href: "/users/sign_in")
+    }
+  end
+
+  scenario "if logged out, sign-out/edit should not present", points: 1 do
     visit "/"
 
     within("nav") {
       expect(page).not_to have_link(nil, href: "/users/sign_out")
       expect(page).not_to have_link(nil, href: "/users/edit")
-      expect(page).to have_link(nil, href: "/users/sign_up")
-      expect(page).to have_link(nil, href: "/users/sign_in")
     }
   end
 

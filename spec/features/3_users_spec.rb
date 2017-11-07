@@ -1,9 +1,6 @@
 require "rails_helper"
 
-show_tests_in_browser = true
-do_not_show_tests_in_browser = false
-
-feature "Users:", js: do_not_show_tests_in_browser do
+feature "Users:" do
 
   scenario "for new photo form, user ID prepopulated or in hidden field", points: 2 do
     user = FactoryGirl.create(:user)
@@ -35,8 +32,10 @@ feature "Users:", js: do_not_show_tests_in_browser do
 
     visit "/users"
 
-    expect(page).to have_content(user_1.username)
-    expect(page).to have_content(user_2.username)
+    users = User.all
+    users.each do |user|
+      expect(page).to have_content(user.username)
+    end
   end
 
   scenario "header includes link to /users", points: 1 do
@@ -76,10 +75,11 @@ feature "Users:", js: do_not_show_tests_in_browser do
 
     visit "/users/#{user.id}"
 
-    expect(page).to have_content(photo_1.caption)
-    expect(page).to have_css("img[src*='#{photo_1.image}']")
-    expect(page).to have_content(photo_2.caption)
-    expect(page).to have_css("img[src*='#{photo_2.image}']")
+    photos = Photo.all
+    photos.each do |photo|
+      expect(page).to have_content(photo.caption)
+      expect(page).to have_css("img[src*='#{photo.image}']")
+    end
   end
 
   scenario "when signed in header has link to /users/:id", points: 2 do
