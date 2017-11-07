@@ -44,9 +44,9 @@ feature "Users:" do
 
     visit "/"
 
-    within("nav") {
-      expect(page).to have_link(nil, href: "/users")
-    }
+    within('nav') do
+      expect(page).to have_link(nil, href: '/users')
+    end
   end
 
   scenario "RCAV set for /users/:id", points: 1 do
@@ -88,9 +88,9 @@ feature "Users:" do
 
     visit "/"
 
-    within("nav") {
+    within('nav') do
       expect(page).to have_link(nil, href: "/users/#{user.id}")
-    }
+    end
   end
 
   scenario "unless signed in, no link to /users/:id", points: 1 do
@@ -98,9 +98,9 @@ feature "Users:" do
 
     visit "/"
 
-    within("nav") {
+    within('nav') do
       expect(page).not_to have_link(nil, href: "/users/#{user.id}")
-    }
+    end
   end
 
   scenario "in routes.rb, /users/:id below 'devise_for :users'", points: 1 do

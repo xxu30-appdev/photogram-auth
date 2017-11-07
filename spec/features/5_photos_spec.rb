@@ -78,9 +78,9 @@ feature "Photos:" do
 
       visit "/photos"
 
-      within("nav") {
-        expect(page).to have_css(".fa-sign-out")
-      }
+      within('nav') do
+        expect(page).to have_css('.fa-sign-out')
+      end
     end
 
     scenario "/photos lists comments with authors", points: 1 do

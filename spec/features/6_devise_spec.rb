@@ -20,9 +20,9 @@ feature "Devise:" do
     fill_in("Username", :with => sample_username)
     click_on("Sign up")
 
-    within("nav") {
+    within('nav') do
       expect(page).to have_content(sample_username)
-    }
+    end
   end
 
   scenario "edit form has username field", points: 1, hint: h("label_for_input") do
@@ -44,9 +44,9 @@ feature "Devise:" do
     fill_in("Current password", :with => user.password)
     click_on("Update")
 
-    within("nav") {
+    within('nav') do
       expect(page).to have_content(new_username)
-    }
+    end
   end
 
   scenario "sign-in form modified with Bootstrap class", points: 1, hint: h("class_must_match") do

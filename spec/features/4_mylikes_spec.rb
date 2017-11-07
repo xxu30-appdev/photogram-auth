@@ -45,9 +45,9 @@ feature "My_likes:" do
 
     visit "/"
 
-    within("nav") {
-      expect(page).to have_link(nil, href: "/my_likes")
-    }
+    within('nav') do
+      expect(page).to have_link(nil, href: '/my_likes')
+    end
   end
 
 end
