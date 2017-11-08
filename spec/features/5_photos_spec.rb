@@ -137,9 +137,9 @@ feature "Photos:" do
   end
 
   scenario "quick-add a comment sets the author correctly", points: 1, hint: h("display_id_or_username")  do
-    user_1 = create(:user)
+    user_1 = create(:user_with_photos)
     user_2 = create(:user)
-    photo = FactoryBot.create(:photo, :user_id => user_1.id)
+    
     login_as(user_2, :scope => :user)
 
     visit "/photos"
