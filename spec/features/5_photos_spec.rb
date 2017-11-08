@@ -93,13 +93,11 @@ feature "Photos:" do
     end
 
     scenario "/photos shows LIKE/UNLIKE button", points: 1 do
-      user_1 = create(:user)
-      user_2 = create(:user)
-      photo_1 = FactoryBot.create(:photo, :user_id => user_1.id)
-      photo_2 = FactoryBot.create(:photo, :user_id => user_2.id)
+      user_1 = create(:user_with_photos)
+      user_2 = create(:user_with_photos)
 
-      like_1 = FactoryBot.create(:like, :user_id => user_1.id, :photo_id => photo_1.id)
-      like_2 = FactoryBot.create(:like, :user_id => user_2.id, :photo_id => photo_2.id)
+      like_1 = FactoryBot.create(:like, :user_id => user_1.id, :photo_id => user_1.photos.first.id)
+      like_2 = FactoryBot.create(:like, :user_id => user_2.id, :photo_id => user_2.photos.first.id)
       login_as(user_1, :scope => :user)
 
       visit "/photos"
