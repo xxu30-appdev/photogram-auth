@@ -13,7 +13,7 @@ module PhotogramAuth
     # -- all .rb files in that directory are automatically loaded.
 
     config.generators do |g|
-      g.factory_girl false
+      g.factory_bot false
       g.test_framework nil
     end
   end

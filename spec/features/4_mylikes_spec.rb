@@ -3,7 +3,7 @@ require "rails_helper"
 feature "My_likes:" do
 
   scenario "RCAV set for /my_likes", points: 1 do
-    user = FactoryGirl.create(:user)
+    user = FactoryBot.create(:user)
     login_as(user, :scope => :user)
 
     visit "/my_likes"
@@ -13,13 +13,13 @@ feature "My_likes:" do
 
   context "my likes" do
     before(:each) do
-      @user_1 = FactoryGirl.create(:user, :username => "1", :email => "1@m.com")
-      @user_2 = FactoryGirl.create(:user, :username => "2", :email => "2@m.com")
-      @photo_1 = FactoryGirl.create(:photo, :user_id => @user_1.id)
-      @photo_2 = FactoryGirl.create(:photo, :user_id => @user_1.id)
-      @photo_3 = FactoryGirl.create(:photo, :user_id => @user_2.id)
-      @like_1 = FactoryGirl.create(:like, :user_id => @user_2.id, :photo_id => @photo_1.id)
-      @like_2 = FactoryGirl.create(:like, :user_id => @user_2.id, :photo_id => @photo_3.id)
+      @user_1 = FactoryBot.create(:user, :username => "1", :email => "1@m.com")
+      @user_2 = FactoryBot.create(:user, :username => "2", :email => "2@m.com")
+      @photo_1 = FactoryBot.create(:photo, :user_id => @user_1.id)
+      @photo_2 = FactoryBot.create(:photo, :user_id => @user_1.id)
+      @photo_3 = FactoryBot.create(:photo, :user_id => @user_2.id)
+      @like_1 = FactoryBot.create(:like, :user_id => @user_2.id, :photo_id => @photo_1.id)
+      @like_2 = FactoryBot.create(:like, :user_id => @user_2.id, :photo_id => @photo_3.id)
       login_as(@user_2, :scope => :user)
       visit "/my_likes"
     end
@@ -40,7 +40,7 @@ feature "My_likes:" do
   end
 
   scenario "header has link to /my_likes", points: 1 do
-    user = FactoryGirl.create(:user)
+    user = FactoryBot.create(:user)
     login_as(user, :scope => :user)
 
     visit "/"

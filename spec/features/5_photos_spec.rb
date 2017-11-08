@@ -4,12 +4,12 @@ feature "Photos:" do
 
   context "index page" do
     before(:each) do
-      @user_1 = FactoryGirl.create(:user, :username => "1", :email => "1@m.com")
-      @user_2 = FactoryGirl.create(:user, :username => "2", :email => "2@m.com")
-      @user_3 = FactoryGirl.create(:user, :username => "Three", :email => "three@m.com")
-      @photo_1 = FactoryGirl.create(:photo, :user_id => @user_1.id)
-      @photo_2 = FactoryGirl.create(:photo, :user_id => @user_2.id)
-      @photo_3 = FactoryGirl.create(:photo, :user_id => @user_3.id)
+      @user_1 = FactoryBot.create(:user, :username => "1", :email => "1@m.com")
+      @user_2 = FactoryBot.create(:user, :username => "2", :email => "2@m.com")
+      @user_3 = FactoryBot.create(:user, :username => "Three", :email => "three@m.com")
+      @photo_1 = FactoryBot.create(:photo, :user_id => @user_1.id)
+      @photo_2 = FactoryBot.create(:photo, :user_id => @user_2.id)
+      @photo_3 = FactoryBot.create(:photo, :user_id => @user_3.id)
     end
 
     scenario "only show edit link for signed-in user's photos", points: 1 do
@@ -39,8 +39,8 @@ feature "Photos:" do
     end
 
     scenario "in /photos, Bootstrap panels used", points: 1 do
-      user = FactoryGirl.create(:user)
-      photo = FactoryGirl.create(:photo, :user_id => user.id)
+      user = FactoryBot.create(:user)
+      photo = FactoryBot.create(:photo, :user_id => user.id)
       login_as(user, :scope => :user)
 
       visit "/photos"
@@ -49,8 +49,8 @@ feature "Photos:" do
     end
 
     scenario "in /photos, Font Awesome fa-plus icon used (and 'Photos' h1 tag isn't)", points: 1 do
-      user = FactoryGirl.create(:user)
-      photo = FactoryGirl.create(:photo, :user_id => user.id)
+      user = FactoryBot.create(:user)
+      photo = FactoryBot.create(:photo, :user_id => user.id)
       login_as(user, :scope => :user)
 
       visit "/photos"
@@ -73,7 +73,7 @@ feature "Photos:" do
     end
 
     scenario "header uses Font Awesome fa-sign-out icon", points: 1 do
-      user = FactoryGirl.create(:user)
+      user = FactoryBot.create(:user)
       login_as(user, :scope => :user)
 
       visit "/photos"
@@ -84,8 +84,8 @@ feature "Photos:" do
     end
 
     scenario "/photos lists comments with authors", points: 1 do
-      comment_1 = FactoryGirl.create(:comment, :user_id => @user_1.id, :body => "comment_1", :photo_id => @photo_1.id)
-      comment_2 = FactoryGirl.create(:comment, :user_id => @user_2.id, :body => "comment_two", :photo_id => @photo_3.id)
+      comment_1 = FactoryBot.create(:comment, :user_id => @user_1.id, :body => "comment_1", :photo_id => @photo_1.id)
+      comment_2 = FactoryBot.create(:comment, :user_id => @user_2.id, :body => "comment_two", :photo_id => @photo_3.id)
       login_as(@user_3, :scope => :user)
 
       visit "/photos"
@@ -100,8 +100,8 @@ feature "Photos:" do
     end
 
     scenario "/photos shows Font Awesome heart icons to add/delete likes", points: 1, hint: h("font_awesome_css_must_match") do
-      like_1 = FactoryGirl.create(:like, :user_id => @user_1.id, :photo_id => @photo_1.id)
-      like_2 = FactoryGirl.create(:like, :user_id => @user_2.id, :photo_id => @photo_2.id)
+      like_1 = FactoryBot.create(:like, :user_id => @user_1.id, :photo_id => @photo_1.id)
+      like_2 = FactoryBot.create(:like, :user_id => @user_2.id, :photo_id => @photo_2.id)
       login_as(@user_1, :scope => :user)
 
       visit "/photos"
@@ -123,9 +123,9 @@ end
 feature "Photos:" do
 
   scenario "quick-add a comment works and leads back to /photos", points: 2 do
-    user_1 = FactoryGirl.create(:user, :username => "1", :email => "1@m.com")
-    user_2 = FactoryGirl.create(:user, :username => "user_2", :email => "two@m.com")
-    photo = FactoryGirl.create(:photo, :user_id => user_1.id)
+    user_1 = FactoryBot.create(:user, :username => "1", :email => "1@m.com")
+    user_2 = FactoryBot.create(:user, :username => "user_2", :email => "two@m.com")
+    photo = FactoryBot.create(:photo, :user_id => user_1.id)
     login_as(user_2, :scope => :user)
 
     visit "/photos"
@@ -138,9 +138,9 @@ feature "Photos:" do
   end
 
   scenario "quick-add a comment sets the author correctly", points: 1, hint: h("display_id_or_username")  do
-    user_1 = FactoryGirl.create(:user, :username => "1", :email => "1@m.com")
-    user_2 = FactoryGirl.create(:user, :username => "user_2", :email => "two@m.com", :id => "#{Time.now.to_i}")
-    photo = FactoryGirl.create(:photo, :user_id => user_1.id)
+    user_1 = FactoryBot.create(:user, :username => "1", :email => "1@m.com")
+    user_2 = FactoryBot.create(:user, :username => "user_2", :email => "two@m.com", :id => "#{Time.now.to_i}")
+    photo = FactoryBot.create(:photo, :user_id => user_1.id)
     login_as(user_2, :scope => :user)
 
     visit "/photos"
@@ -160,8 +160,8 @@ feature "Photos:" do
   end
 
   scenario "quick-add a like works in /photos", points: 2 do
-    user = FactoryGirl.create(:user, :username => "1", :email => "1@m.com")
-    photo = FactoryGirl.create(:photo, :user_id => user.id)
+    user = FactoryBot.create(:user, :username => "1", :email => "1@m.com")
+    photo = FactoryBot.create(:photo, :user_id => user.id)
     login_as(user, :scope => :user)
 
     visit "/photos"
@@ -171,9 +171,9 @@ feature "Photos:" do
   end
 
   scenario "quick-delete a like works in /photos", points: 1 do
-    user = FactoryGirl.create(:user, :username => "1", :email => "1@m.com")
-    photo = FactoryGirl.create(:photo, :user_id => user.id)
-    like = FactoryGirl.create(:like, :user_id => user.id, :photo_id => photo.id)
+    user = FactoryBot.create(:user, :username => "1", :email => "1@m.com")
+    photo = FactoryBot.create(:photo, :user_id => user.id)
+    like = FactoryBot.create(:like, :user_id => user.id, :photo_id => photo.id)
     login_as(user, :scope => :user)
 
     visit "/photos"

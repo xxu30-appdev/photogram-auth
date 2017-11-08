@@ -3,7 +3,7 @@ require "rails_helper"
 feature "Users:" do
 
   scenario "for new photo form, user ID prepopulated or in hidden field", points: 2 do
-    user = FactoryGirl.create(:user)
+    user = FactoryBot.create(:user)
     login_as(user, :scope => :user)
 
     visit "/photos/new"
@@ -17,7 +17,7 @@ feature "Users:" do
   end
 
   scenario "RCAV set for /users", points: 1 do
-    user = FactoryGirl.create(:user)
+    user = FactoryBot.create(:user)
     login_as(user, :scope => :user)
 
     visit "/users"
@@ -26,8 +26,8 @@ feature "Users:" do
   end
 
   scenario "/users lists all users", points: 2 do
-    user_1 = FactoryGirl.create(:user, :username => "1", :email => "1@m.com")
-    user_2 = FactoryGirl.create(:user, :username => "2", :email => "2@m.com")
+    user_1 = FactoryBot.create(:user, :username => "1", :email => "1@m.com")
+    user_2 = FactoryBot.create(:user, :username => "2", :email => "2@m.com")
     login_as(user_1, :scope => :user)
 
     visit "/users"
@@ -39,7 +39,7 @@ feature "Users:" do
   end
 
   scenario "header includes link to /users", points: 1 do
-    user = FactoryGirl.create(:user)
+    user = FactoryBot.create(:user)
     login_as(user, :scope => :user)
 
     visit "/"
@@ -50,7 +50,7 @@ feature "Users:" do
   end
 
   scenario "RCAV set for /users/:id", points: 1 do
-    user = FactoryGirl.create(:user)
+    user = FactoryBot.create(:user)
     login_as(user, :scope => :user)
 
     visit "/users/#{user.id}"
@@ -59,7 +59,7 @@ feature "Users:" do
   end
 
   scenario "/users/:id lists user's details", points: 1 do
-    user = FactoryGirl.create(:user)
+    user = FactoryBot.create(:user)
     login_as(user, :scope => :user)
 
     visit "/users/#{user.id}"
@@ -68,9 +68,9 @@ feature "Users:" do
   end
 
   scenario "/users/:id lists user's photos", points: 2 do
-    user = FactoryGirl.create(:user)
-    photo_1 = FactoryGirl.create(:photo, :user_id => user.id)
-    photo_2 = FactoryGirl.create(:photo, :user_id => user.id)
+    user = FactoryBot.create(:user)
+    photo_1 = FactoryBot.create(:photo, :user_id => user.id)
+    photo_2 = FactoryBot.create(:photo, :user_id => user.id)
     login_as(user, :scope => :user)
 
     visit "/users/#{user.id}"
@@ -83,7 +83,7 @@ feature "Users:" do
   end
 
   scenario "when signed in header has link to /users/:id", points: 2 do
-    user = FactoryGirl.create(:user)
+    user = FactoryBot.create(:user)
     login_as(user, :scope => :user)
 
     visit "/"
@@ -94,7 +94,7 @@ feature "Users:" do
   end
 
   scenario "unless signed in, no link to /users/:id", points: 1 do
-    user = FactoryGirl.create(:user)
+    user = FactoryBot.create(:user)
 
     visit "/"
 
@@ -104,7 +104,7 @@ feature "Users:" do
   end
 
   scenario "in routes.rb, /users/:id below 'devise_for :users'", points: 1 do
-    user = FactoryGirl.create(:user)
+    user = FactoryBot.create(:user)
     login_as(user, :scope => :user)
 
     visit "/users/sign_in"

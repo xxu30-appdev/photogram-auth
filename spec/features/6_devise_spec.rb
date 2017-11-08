@@ -26,7 +26,7 @@ feature "Devise:" do
   end
 
   scenario "edit form has username field", points: 1, hint: h("label_for_input") do
-    user = FactoryGirl.create(:user)
+    user = FactoryBot.create(:user)
     login_as(user, :scope => :user)
 
     visit "/users/edit"
@@ -35,7 +35,7 @@ feature "Devise:" do
   end
 
   scenario "edit form username field works", points: 2, hint: h("label_for_input") do
-    user = FactoryGirl.create(:user)
+    user = FactoryBot.create(:user)
     login_as(user, :scope => :user)
     new_username = "User-#{Time.now.to_f}"
 
