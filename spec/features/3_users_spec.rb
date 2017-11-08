@@ -67,7 +67,7 @@ feature "Users:" do
     expect(page).to have_content(user.username)
   end
 
-  scenario "/users/:id lists user's photos", points: 2 do
+  scenario "/users/:id lists user's photos caption", points: 2 do
     user = create(:user)
     photo_1 = FactoryBot.create(:photo, :user_id => user.id)
     photo_2 = FactoryBot.create(:photo, :user_id => user.id)
@@ -78,6 +78,19 @@ feature "Users:" do
     photos = Photo.all
     photos.each do |photo|
       expect(page).to have_content(photo.caption)
+    end
+  end
+
+  scenario "/users/:id lists user's photos", points: 2 do
+    user = create(:user)
+    photo_1 = FactoryBot.create(:photo, :user_id => user.id)
+    photo_2 = FactoryBot.create(:photo, :user_id => user.id)
+    login_as(user, :scope => :user)
+
+    visit "/users/#{user.id}"
+
+    photos = Photo.all
+    photos.each do |photo|
       expect(page).to have_css("img[src*='#{photo.image}']")
     end
   end
