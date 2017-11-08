@@ -142,15 +142,15 @@ end
 feature "Photos:" do
 
   scenario "quick-add a comment works and leads back to /photos", points: 2 do
-    user_1 = create(:user)
+    user_1 = create(:user_with_photos)
     user_2 = create(:user)
-    photo = create(:photo, :user_id => user_1.id)
     login_as(user_2, :scope => :user)
 
     visit "/photos"
+    
     new_comment = "Just added a comment at #{Time.now.to_f}"
     fill_in("Add a comment...", with: new_comment)
-    find(".fa-commenting-o").find(:xpath,".//..").click
+    find("button", text: 'Add Comment').click
 
     expect(page).to have_content(new_comment)
     expect(page).to have_current_path("/photos")
@@ -165,7 +165,7 @@ feature "Photos:" do
     visit "/photos"
     new_comment = "Just added a comment at #{Time.now.to_f + Time.now.to_f}"
     fill_in("Add a comment...", with: new_comment)
-    find(".fa-commenting-o").find(:xpath,".//..").click
+    find("button", text: 'Add Comment').click
     visit "/comments"
 
     expect(page).to have_content(new_comment)
