@@ -48,14 +48,14 @@ feature "Photos:" do
       expect(page).to have_css(".panel")
     end
 
-    scenario "in /photos, Font Awesome fa-plus icon used (and 'Photos' h1 tag isn't)", points: 1 do
+    scenario "in /photos, ADD PHOTO link should present (and 'Photos' h1 tag isn't)", points: 1 do
       user = FactoryBot.create(:user)
       photo = FactoryBot.create(:photo, :user_id => user.id)
       login_as(user, :scope => :user)
 
       visit "/photos"
 
-      expect(page).to have_css(".fa-plus")
+      expect(page).to have_link("Add Photo", href: "/photos/new")
       expect(page).not_to have_selector("h1", text: "Photos")
     end
 
