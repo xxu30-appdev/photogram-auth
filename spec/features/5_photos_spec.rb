@@ -47,7 +47,7 @@ feature "Photos:" do
       expect(page).not_to have_selector("h1", text: "Photos")
     end
 
-    scenario "/photos displays per-photo username, photo, and time elapsed", points: 1, hint: h("time_in_words") do
+    scenario "/photos displays per-photo username", points: 1 do
       user = create(:user)
       login_as(user, :scope => :user)
 
@@ -56,7 +56,29 @@ feature "Photos:" do
 
       photos.each do |photo|
         expect(page).to have_content("#{photo.user.username}")
+      end
+    end
+
+    scenario "/photos displays photo", points: 1 do
+      user = create(:user)
+      login_as(user, :scope => :user)
+
+      visit "/photos"
+      photos = Photo.all
+
+      photos.each do |photo|
         expect(page).to have_css("img[src*='#{photo.image}']")
+      end
+    end
+
+    scenario "/photos displays per-photo time elapsed", points: 1, hint: h("time_in_words") do
+      user = create(:user)
+      login_as(user, :scope => :user)
+
+      visit "/photos"
+      photos = Photo.all
+
+      photos.each do |photo|
         expect(page).to have_content(ApplicationController.helpers.time_ago_in_words(photo.created_at))
       end
     end
