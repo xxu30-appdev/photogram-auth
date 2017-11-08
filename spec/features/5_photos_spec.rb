@@ -3,45 +3,42 @@ require "rails_helper"
 feature "Photos:" do
 
   context "index page" do
-    before(:each) do
-      @user_1 = create(:user)
-      @user_2 = create(:user)
-      @user_3 = create(:user)
-
-      @photo_1 = FactoryBot.create(:photo, :user_id => @user_1.id)
-      @photo_2 = FactoryBot.create(:photo, :user_id => @user_2.id)
-      @photo_3 = FactoryBot.create(:photo, :user_id => @user_3.id)
-    end
 
     scenario "only show edit link for signed-in user's photos", points: 1 do
-      login_as(@user_2, :scope => :user)
+      owner = create(:user)
+      non_owner = create(:user)
+
+      login_as(owner, :scope => :user)
       visit "/photos"
 
-      @user_2.photos.each do |photo|
+      owner.photos.each do |photo|
         expect(page).to have_link(nil, href: "/photos/#{photo.id}/edit")
       end
 
-      @user_1.photos.each do |photo|
+      non_owner.photos.each do |photo|
         expect(page).not_to have_link(nil, href: "/photos/#{photo.id}/edit")
       end
     end
 
     scenario "only show delete link for signed-in user's photos", points: 1 do
-      login_as(@user_2, :scope => :user)
+      owner = create(:user)
+      non_owner = create(:user)
+
+      login_as(owner, :scope => :user)
       visit "/photos"
 
-      @user_2.photos.each do |photo|
+      owner.photos.each do |photo|
         expect(page).to have_link(nil, href: "/delete_photo/#{photo.id}")
       end
 
-      @user_1.photos.each do |photo|
+      non_owner.photos.each do |photo|
         expect(page).not_to have_link(nil, href: "/delete_photo/#{photo.id}")
       end
     end
 
     scenario "in /photos, ADD PHOTO link should present (and 'Photos' h1 tag isn't)", points: 1 do
       user = create(:user)
-      photo = FactoryBot.create(:photo, :user_id => user.id)
+      photo = create(:photo, :user_id => user.id)
       login_as(user, :scope => :user)
 
       visit "/photos"
@@ -51,7 +48,8 @@ feature "Photos:" do
     end
 
     scenario "/photos displays per-photo username, photo, and time elapsed", points: 1, hint: h("time_in_words") do
-      login_as(@user_3, :scope => :user)
+      user = create(:user)
+      login_as(user, :scope => :user)
 
       visit "/photos"
       photos = Photo.all
@@ -75,9 +73,16 @@ feature "Photos:" do
     end
 
     scenario "/photos lists comments with authors", points: 1 do
-      comment_1 = FactoryBot.create(:comment, :user_id => @user_1.id, :body => "comment_1", :photo_id => @photo_1.id)
-      comment_2 = FactoryBot.create(:comment, :user_id => @user_2.id, :body => "comment_two", :photo_id => @photo_3.id)
-      login_as(@user_3, :scope => :user)
+      user_1 = create(:user)
+      user_2 = create(:user)
+      user_3 = create(:user)
+      photo_1 = FactoryBot.create(:photo, :user_id => user_1.id)
+      photo_2 = FactoryBot.create(:photo, :user_id => user_2.id)
+      photo_3 = FactoryBot.create(:photo, :user_id => user_3.id)
+
+      comment_1 = FactoryBot.create(:comment, :user_id => user_1.id, :body => "comment_1", :photo_id => photo_1.id)
+      comment_2 = FactoryBot.create(:comment, :user_id => user_2.id, :body => "comment_two", :photo_id => photo_3.id)
+      login_as(user_3, :scope => :user)
 
       visit "/photos"
 
@@ -91,9 +96,14 @@ feature "Photos:" do
     end
 
     scenario "/photos shows LIKE/UNLIKE button", points: 1 do
-      like_1 = FactoryBot.create(:like, :user_id => @user_1.id, :photo_id => @photo_1.id)
-      like_2 = FactoryBot.create(:like, :user_id => @user_2.id, :photo_id => @photo_2.id)
-      login_as(@user_1, :scope => :user)
+      user_1 = create(:user)
+      user_2 = create(:user)
+      photo_1 = FactoryBot.create(:photo, :user_id => user_1.id)
+      photo_2 = FactoryBot.create(:photo, :user_id => user_2.id)
+
+      like_1 = FactoryBot.create(:like, :user_id => user_1.id, :photo_id => photo_1.id)
+      like_2 = FactoryBot.create(:like, :user_id => user_2.id, :photo_id => photo_2.id)
+      login_as(user_1, :scope => :user)
 
       visit "/photos"
 
@@ -103,7 +113,9 @@ feature "Photos:" do
     end
 
     scenario "/photos includes form field with placeholder 'Add a comment...'", points: 1 do
-      login_as(@user_1, :scope => :user)
+      user = create(:user)
+      login_as(user, :scope => :user)
+      photo = FactoryBot.create(:photo, :user_id => user.id)
 
       visit "/photos"
 
