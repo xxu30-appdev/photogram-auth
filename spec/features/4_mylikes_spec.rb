@@ -13,14 +13,10 @@ feature "My_likes:" do
 
   context "my likes" do
     scenario "shows photos a user has liked", points: 1 do
-      user_1 = create(:user)
-      user_2 = create(:user)
-      user_3 = create(:user)
-      photo_1 = FactoryBot.create(:photo, :user_id => user_1.id)
-      photo_2 = FactoryBot.create(:photo, :user_id => user_2.id)
-      photo_3 = FactoryBot.create(:photo, :user_id => user_3.id)
-      like_1 = FactoryBot.create(:like, :user_id => user_1.id, :photo_id => photo_1.id)
-      like_2 = FactoryBot.create(:like, :user_id => user_3.id, :photo_id => photo_3.id)
+      user_1, user_2, user_3 = create_list(:user_with_photos, 3)
+
+      like_1 = FactoryBot.create(:like, :user_id => user_1.id, :photo_id => user_1.photos.first.id)
+      like_2 = FactoryBot.create(:like, :user_id => user_3.id, :photo_id => user_3.photos.first.id)
       login_as(user_2, :scope => :user)
       visit "/my_likes"
 
@@ -31,14 +27,11 @@ feature "My_likes:" do
     end
 
     scenario "does not show photos a user hasn't liked", points: 1 do
-      user_1 = create(:user)
-      user_2 = create(:user)
-      user_3 = create(:user)
-      photo_1 = FactoryBot.create(:photo, :user_id => user_1.id)
-      photo_2 = FactoryBot.create(:photo, :user_id => user_2.id)
-      photo_3 = FactoryBot.create(:photo, :user_id => user_3.id)
-      like_1 = FactoryBot.create(:like, :user_id => user_1.id, :photo_id => photo_1.id)
-      like_2 = FactoryBot.create(:like, :user_id => user_3.id, :photo_id => photo_3.id)
+      user_1, user_2, user_3 = create_list(:user_with_photos, 3)
+
+      like_1 = FactoryBot.create(:like, :user_id => user_1.id, :photo_id => user_1.photos.first.id)
+      like_2 = FactoryBot.create(:like, :user_id => user_3.id, :photo_id => user_3.photos.first.id)
+
       login_as(user_2, :scope => :user)
       visit "/my_likes"
 
