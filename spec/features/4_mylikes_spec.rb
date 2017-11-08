@@ -24,14 +24,14 @@ feature "My_likes:" do
       visit "/my_likes"
     end
 
-    scenario "shows photos current user liked", points: 1 do
+    scenario "shows photos a user has liked", points: 1 do
       @user_2.likes.each do |like|
         expect(page).to have_content(like.photo.caption)
         expect(page).to have_css("img[src*='#{like.photo.image}']")
       end
     end
 
-    scenario "not shows photos current user liked", points: 1 do
+    scenario "does not show photos a user hasn't liked", points: 1 do
       @user_1.likes.each do |like|
         expect(page).not_to have_content(like.photo.caption)
         expect(page).not_to have_css("img[src*='#{like.photo.image}']")
