@@ -184,9 +184,9 @@ feature "Photos:" do
     login_as(user, :scope => :user)
 
     visit "/photos"
-    find(".fa-heart-o").find(:xpath,".//..").click
+    find("button", text: 'Like').click
 
-    expect(page).to have_css(".fa-heart")
+    expect(page).to have_link("Unlike", href: "/delete_like/#{photo.likes.first.id}")
   end
 
   scenario "quick-delete a like works in /photos", points: 1 do
@@ -197,13 +197,9 @@ feature "Photos:" do
 
     visit "/photos"
 
-    if page.has_link?(nil, href: "/delete_like/#{like.id}")
-      expect(page).to have_css(".fa-heart")
-      expect(page).to have_link(nil, href: "/delete_like/#{like.id}")
-    else
-      find(".fa-heart").click
-      expect(page).to have_css(".fa-heart-o")
-    end
+    find(:xpath, "//a[@href='/delete_like/#{like.id}']").click
+
+    expect(page).to have_css("button", text: 'Like')
   end
 
 end
