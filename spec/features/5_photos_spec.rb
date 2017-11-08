@@ -170,9 +170,9 @@ feature "Photos:" do
   end
 
   scenario "quick-delete a like works in /photos", points: 1 do
-    user = create(:user)
-    photo = FactoryBot.create(:photo, :user_id => user.id)
-    like = FactoryBot.create(:like, :user_id => user.id, :photo_id => photo.id)
+    user = create(:user_with_photos)
+    
+    like = FactoryBot.create(:like, :user_id => user.id, :photo_id => user.photos.first.id)
     login_as(user, :scope => :user)
 
     visit "/photos"
