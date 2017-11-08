@@ -99,15 +99,16 @@ feature "Photos:" do
       end
     end
 
-    scenario "/photos shows Font Awesome heart icons to add/delete likes", points: 1, hint: h("font_awesome_css_must_match") do
+    scenario "/photos shows LIKE/UNLIKE button", points: 1 do
       like_1 = FactoryBot.create(:like, :user_id => @user_1.id, :photo_id => @photo_1.id)
       like_2 = FactoryBot.create(:like, :user_id => @user_2.id, :photo_id => @photo_2.id)
       login_as(@user_1, :scope => :user)
 
       visit "/photos"
 
-      expect(page).to have_css(".fa-heart")
-      expect(page).to have_css(".fa-heart-o")
+      expect(page).to have_css("button", text: 'Like')
+      
+      expect(page).to have_link("Unlike", href: "/delete_like/#{like_1.id}")
     end
 
     scenario "/photos includes form field with placeholder 'Add a comment...'", points: 1 do
