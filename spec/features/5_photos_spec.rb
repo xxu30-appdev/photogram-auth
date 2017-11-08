@@ -72,14 +72,14 @@ feature "Photos:" do
       end
     end
 
-    scenario "header uses Font Awesome fa-sign-out icon", points: 1 do
+    scenario "header have Sign Out link", points: 1 do
       user = FactoryBot.create(:user)
       login_as(user, :scope => :user)
 
       visit "/photos"
-
+      
       within('nav') do
-        expect(page).to have_css('.fa-sign-out')
+        expect(page).to have_link("Sign Out", href: "/users/sign_out")
       end
     end
 
