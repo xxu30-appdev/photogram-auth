@@ -4,9 +4,10 @@ feature "Photos:" do
 
   context "index page" do
     before(:each) do
-      @user_1 = FactoryBot.create(:user, :username => "1", :email => "1@m.com")
-      @user_2 = FactoryBot.create(:user, :username => "2", :email => "2@m.com")
-      @user_3 = FactoryBot.create(:user, :username => "Three", :email => "three@m.com")
+      @user_1 = create(:user)
+      @user_2 = create(:user)
+      @user_3 = create(:user)
+
       @photo_1 = FactoryBot.create(:photo, :user_id => @user_1.id)
       @photo_2 = FactoryBot.create(:photo, :user_id => @user_2.id)
       @photo_3 = FactoryBot.create(:photo, :user_id => @user_3.id)
@@ -39,7 +40,7 @@ feature "Photos:" do
     end
 
     scenario "in /photos, ADD PHOTO link should present (and 'Photos' h1 tag isn't)", points: 1 do
-      user = FactoryBot.create(:user)
+      user = create(:user)
       photo = FactoryBot.create(:photo, :user_id => user.id)
       login_as(user, :scope => :user)
 
@@ -63,11 +64,11 @@ feature "Photos:" do
     end
 
     scenario "header have Sign Out link", points: 1 do
-      user = FactoryBot.create(:user)
+      user = create(:user)
       login_as(user, :scope => :user)
 
       visit "/photos"
-      
+
       within('nav') do
         expect(page).to have_link("Sign Out", href: "/users/sign_out")
       end
@@ -114,9 +115,9 @@ end
 feature "Photos:" do
 
   scenario "quick-add a comment works and leads back to /photos", points: 2 do
-    user_1 = FactoryBot.create(:user, :username => "1", :email => "1@m.com")
-    user_2 = FactoryBot.create(:user, :username => "user_2", :email => "two@m.com")
-    photo = FactoryBot.create(:photo, :user_id => user_1.id)
+    user_1 = create(:user)
+    user_2 = create(:user)
+    photo = create(:photo, :user_id => user_1.id)
     login_as(user_2, :scope => :user)
 
     visit "/photos"
@@ -129,8 +130,8 @@ feature "Photos:" do
   end
 
   scenario "quick-add a comment sets the author correctly", points: 1, hint: h("display_id_or_username")  do
-    user_1 = FactoryBot.create(:user, :username => "1", :email => "1@m.com")
-    user_2 = FactoryBot.create(:user, :username => "user_2", :email => "two@m.com", :id => "#{Time.now.to_i}")
+    user_1 = create(:user)
+    user_2 = create(:user)
     photo = FactoryBot.create(:photo, :user_id => user_1.id)
     login_as(user_2, :scope => :user)
 
@@ -151,7 +152,7 @@ feature "Photos:" do
   end
 
   scenario "quick-add a like works in /photos", points: 2 do
-    user = FactoryBot.create(:user, :username => "1", :email => "1@m.com")
+    user = create(:user)
     photo = FactoryBot.create(:photo, :user_id => user.id)
     login_as(user, :scope => :user)
 
@@ -162,7 +163,7 @@ feature "Photos:" do
   end
 
   scenario "quick-delete a like works in /photos", points: 1 do
-    user = FactoryBot.create(:user, :username => "1", :email => "1@m.com")
+    user = create(:user)
     photo = FactoryBot.create(:photo, :user_id => user.id)
     like = FactoryBot.create(:like, :user_id => user.id, :photo_id => photo.id)
     login_as(user, :scope => :user)
