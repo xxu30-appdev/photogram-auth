@@ -34,7 +34,7 @@ feature "Photos Index Page:" do
     end
   end
 
-  scenario "in /photos, ADD PHOTO link should present", points: 1 do
+  scenario "ADD PHOTO link should present", points: 1 do
     user = create(:user)
     photo = create(:photo, :user_id => user.id)
     login_as(user, :scope => :user)
@@ -44,7 +44,7 @@ feature "Photos Index Page:" do
     expect(page).to have_link("Add Photo", href: "/photos/new")
   end
 
-  scenario "in /photos, 'Photos' h1 tag should not present", points: 1 do
+  scenario "'Photos' h1 tag should not present", points: 1 do
     user = create(:user)
     photo = create(:photo, :user_id => user.id)
     login_as(user, :scope => :user)
@@ -54,7 +54,7 @@ feature "Photos Index Page:" do
     expect(page).not_to have_selector("h1", text: "Photos")
   end
 
-  scenario "/photos displays per-photo username", points: 1 do
+  scenario "displays per-photo username", points: 1 do
     user = create(:user)
     login_as(user, :scope => :user)
 
@@ -66,7 +66,7 @@ feature "Photos Index Page:" do
     end
   end
 
-  scenario "/photos displays photo", points: 1 do
+  scenario "displays photo", points: 1 do
     user = create(:user)
     login_as(user, :scope => :user)
 
@@ -78,7 +78,7 @@ feature "Photos Index Page:" do
     end
   end
 
-  scenario "/photos displays per-photo time elapsed", points: 1, hint: h("time_in_words") do
+  scenario "displays per-photo time elapsed", points: 1, hint: h("time_in_words") do
     user = create(:user)
     login_as(user, :scope => :user)
 
@@ -101,7 +101,7 @@ feature "Photos Index Page:" do
     end
   end
 
-  scenario "/photos lists comments with authors", points: 1 do
+  scenario "lists comments with authors", points: 1 do
     user_1, user_2, user_3 = create_list(:user_with_photos, 3)
 
     comment_1 = FactoryBot.create(:comment, :user_id => user_1.id, :body => "comment_1", :photo_id => user_1.photos.first.id)
@@ -118,7 +118,7 @@ feature "Photos Index Page:" do
     end
   end
 
-  scenario "/photos lists comments in each photo", points: 1 do
+  scenario "lists comments in each photo", points: 1 do
     user_1, user_2, user_3 = create_list(:user_with_photos, 3)
 
     comment_1 = FactoryBot.create(:comment, :user_id => user_1.id, :body => "comment_1", :photo_id => user_1.photos.first.id)
@@ -135,7 +135,7 @@ feature "Photos Index Page:" do
     end
   end
 
-  scenario "/photos shows LIKE/UNLIKE button", points: 1 do
+  scenario "shows LIKE/UNLIKE button", points: 1 do
     user_1 = create(:user_with_photos)
     user_2 = create(:user_with_photos)
 
@@ -150,7 +150,7 @@ feature "Photos Index Page:" do
     expect(page).to have_link("Unlike", href: "/delete_like/#{like_1.id}")
   end
 
-  scenario "/photos includes form field with placeholder 'Add a comment...'", points: 1 do
+  scenario "includes form field with placeholder 'Add a comment...'", points: 1 do
     user = create(:user)
     login_as(user, :scope => :user)
     photo = FactoryBot.create(:photo, :user_id => user.id)
@@ -174,7 +174,7 @@ feature "Photos Index Page:" do
     expect(page).to have_content(new_comment)
   end
 
-  scenario "after adding a comment page should leads back to /photos", points: 2 do
+  scenario "after adding a comment page it should leads back to /photos", points: 2 do
     user_1 = create(:user_with_photos)
     user_2 = create(:user)
     login_as(user_2, :scope => :user)
