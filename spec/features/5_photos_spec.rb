@@ -178,7 +178,7 @@ feature "Photos:" do
     end
   end
 
-  scenario "quick-add a like works in /photos", points: 2 do
+  scenario "displays a link to unlike a photo after liking a photo", points: 2 do
     user = create(:user)
     photo = FactoryBot.create(:photo, :user_id => user.id)
     login_as(user, :scope => :user)
@@ -189,7 +189,7 @@ feature "Photos:" do
     expect(page).to have_link("Unlike", href: "/delete_like/#{photo.likes.first.id}")
   end
 
-  scenario "quick-delete a like works in /photos", points: 1 do
+  scenario "displays a link to like a photo after unliking a photo", points: 1 do
     user = create(:user_with_photos)
     
     like = FactoryBot.create(:like, :user_id => user.id, :photo_id => user.photos.first.id)
