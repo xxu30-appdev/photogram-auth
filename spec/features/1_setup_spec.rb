@@ -2,7 +2,7 @@ require "rails_helper"
 
 feature "Devise" do
   scenario "root url set to photos index", points: 1 do
-    user = FactoryBot.create(:user)
+    user = create(:user)
 
     visit "/"
     if page.has_selector?("label", text: "Email")
@@ -25,7 +25,7 @@ feature "Devise" do
   end
 
   scenario "login form works", points: 1 do
-    user = FactoryBot.create(:user)
+    user = create(:user)
 
     visit "/"
     fill_in("Email", :with => user.email)

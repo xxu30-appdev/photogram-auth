@@ -3,7 +3,7 @@ require "rails_helper"
 feature "My_likes:" do
 
   scenario "RCAV set for /my_likes", points: 1 do
-    user = FactoryBot.create(:user)
+    user = create(:user)
     login_as(user, :scope => :user)
 
     visit "/my_likes"
@@ -13,8 +13,8 @@ feature "My_likes:" do
 
   context "my likes" do
     before(:each) do
-      @user_1 = FactoryBot.create(:user, :username => "1", :email => "1@m.com")
-      @user_2 = FactoryBot.create(:user, :username => "2", :email => "2@m.com")
+      @user_1 = create(:user)
+      @user_2 = create(:user)
       @photo_1 = FactoryBot.create(:photo, :user_id => @user_1.id)
       @photo_2 = FactoryBot.create(:photo, :user_id => @user_1.id)
       @photo_3 = FactoryBot.create(:photo, :user_id => @user_2.id)
@@ -40,7 +40,7 @@ feature "My_likes:" do
   end
 
   scenario "header has link to /my_likes", points: 1 do
-    user = FactoryBot.create(:user)
+    user = create(:user)
     login_as(user, :scope => :user)
 
     visit "/"

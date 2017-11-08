@@ -3,7 +3,7 @@ require "rails_helper"
 feature "Header:" do
 
   scenario "edit profile link is just username", points: 2 do
-    user = FactoryBot.create(:user)
+    user = create(:user)
     login_as(user, :scope => :user)
 
     visit "/"
@@ -14,7 +14,7 @@ feature "Header:" do
   end
 
   scenario "no 'dummy' text in sign-out link", points: 1 do
-    user = FactoryBot.create(:user)
+    user = create(:user)
     login_as(user, :scope => :user)
 
     visit "/"
