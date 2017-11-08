@@ -95,9 +95,7 @@ feature "Photos:" do
     end
 
     scenario "/photos lists comments with authors", points: 1 do
-      user_1 = create(:user_with_photos)
-      user_2 = create(:user_with_photos)
-      user_3 = create(:user_with_photos)
+      user_1, user_2, user_3 = create_list(:user_with_photos, 3)
 
       comment_1 = FactoryBot.create(:comment, :user_id => user_1.id, :body => "comment_1", :photo_id => user_1.photos.first.id)
       comment_2 = FactoryBot.create(:comment, :user_id => user_2.id, :body => "comment_two", :photo_id => user_2.photos.first.id)
