@@ -24,7 +24,7 @@ feature "Header:" do
     end
   end
 
-  scenario "if logged out, sign-up link should present", points: 1 do
+  scenario "shows sign-up link if logged out", points: 1 do
     visit "/"
 
     within('nav') do
@@ -32,7 +32,7 @@ feature "Header:" do
     end
   end
 
-  scenario "if logged out, sign-in link should present", points: 1 do
+  scenario "shows sign-in link if logged out", points: 1 do
     visit "/"
 
     within('nav') do
@@ -40,7 +40,7 @@ feature "Header:" do
     end
   end
 
-  scenario "if logged out, sign-out link should not present", points: 1 do
+  scenario "not shows sign-out link if logged out", points: 1 do
     visit "/"
 
     within('nav') do
@@ -48,7 +48,7 @@ feature "Header:" do
     end
   end
 
-  scenario "if logged out, edit link should not present", points: 1 do
+  scenario "not shows edit link if logged out", points: 1 do
     visit "/"
 
     within('nav') do
