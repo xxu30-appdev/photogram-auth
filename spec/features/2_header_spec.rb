@@ -24,20 +24,34 @@ feature "Header:" do
     end
   end
 
-  scenario "if logged out, sign-up/sign-in should present", points: 1 do
+  scenario "if logged out, sign-up link should present", points: 1 do
     visit "/"
 
     within('nav') do
       expect(page).to have_link(nil, href: '/users/sign_up')
+    end
+  end
+
+  scenario "if logged out, sign-in link should present", points: 1 do
+    visit "/"
+
+    within('nav') do
       expect(page).to have_link(nil, href: '/users/sign_in')
     end
   end
 
-  scenario "if logged out, sign-out/edit should not present", points: 1 do
+  scenario "if logged out, sign-out link should not present", points: 1 do
     visit "/"
 
     within('nav') do
       expect(page).not_to have_link(nil, href: '/users/sign_out')
+    end
+  end
+
+  scenario "if logged out, edit link should not present", points: 1 do
+    visit "/"
+
+    within('nav') do
       expect(page).not_to have_link(nil, href: '/users/edit')
     end
   end
