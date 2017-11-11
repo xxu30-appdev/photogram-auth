@@ -87,6 +87,7 @@ Below I suggest a plan of attack. Try to imagine, as you go through it, how each
 
  1. Set up a Cloud9 workspace as usual.
  1. `bin/setup`
+ 1. `bin/server` or click "Run Project", navigate to the live app, and verify that it's a blank application with nothing in it yet.
  1. I've already added [starter_generators](https://guides.firstdraft.com/starter_generators.html) and [Devise](https://guides.firstdraft.com/authentication-and-authorization-with-devise.html) to the Gemfile. You might want to pull up those cheatsheets and have them handy.
  1. You can navigate to `[YOUR APP PREVIEW URL]/git` in Chrome to access the visual Git interface; remember to commit and branch often so that you can always get back to a good state if an experiment goes wrong.
  1. Generate the User table [with Devise](https://guides.firstdraft.com/authentication-and-authorization-with-devise.html#generate-a-new-model-with-devise):
@@ -95,7 +96,7 @@ Below I suggest a plan of attack. Try to imagine, as you go through it, how each
     rails generate devise user username:string
     ```
 
-    Devise will automatically add email, password, and all the other columns that it needs to secure accounts. You just specify any columns you want besides those (in this case, we want usernames).
+    Devise will automatically add email, password, and all the other columns that it needs to secure accounts. You just specify any additional columns you want besides those (in this case, we only want usernames).
 
  1. Generate the rest of your CRUD resources [with starter_generators](https://guides.firstdraft.com/starter_generators.html#resources):
 
@@ -105,7 +106,6 @@ Below I suggest a plan of attack. Try to imagine, as you go through it, how each
     rails generate starter:resource comment photo_id:integer body:text user_id:integer
     ```
 
- 1. Set the homepage to the photos index page with `root "photos#index"` in `config/routes.rb`.
  1. Now that you have generated your model files, **add all of the associations and validations listed above immediately**.
  1. Set the root URL to the photos index page:
 
@@ -114,7 +114,7 @@ Below I suggest a plan of attack. Try to imagine, as you go through it, how each
     root "photos#index"
     ```
 
- 1. You can finally Run Project and navigate to the application to see your work so far. If you haven't `rails db:migrate`d yet, it will ask you to now.
+ 1. Finally, click through your app preview to see your work so far. If you haven't `rails db:migrate`d yet, it will ask you to now.
  1. Generate [a better application layout](https://guides.firstdraft.com/starter_generators.html#application-layout), including Bootstrap:
 
     ```bash
@@ -165,9 +165,9 @@ Below I suggest a plan of attack. Try to imagine, as you go through it, how each
  1. **Make the heart to quick-add/delete a like directly below a photo work.**
  1. [Customize the generated sign-in/sign-out/edit profile forms](https://guides.firstdraft.com/authentication-and-authorization-with-devise.html#customizing-devise-views) to a) include a field for username, b) make them look nicer. [Here are some Bootstrapped Devise forms that you can build off of](https://github.com/firstdraft/bootstrapped_devise_forms), but you need to add a field for username, and then [let that param through additional security](https://guides.firstdraft.com/authentication-and-authorization-with-devise.html#step-three-allow-additional-parameters-through-security) before the form will work.
 
- 1. Optional: Use [the Carrierwave cheatsheet](https://gist.github.com/raghubetina/ec1b65713e9e8f863539) to enable image uploads (rather than pasting in existing URLs). You'll find an accompanying video under Pages in Canvas.
- 1. Optional: Follow [the Tweeter example project](https://github.com/firstdraft/tweeter) to enable followers/timeline. You'll find an accompanying video titled "Social Network" under Pages in Canvas.
+ 1. Optional: On Canvas under "Additional Topics" there is a video and written guide to using the CarrierWave gem to enable image uploads (rather than pasting in existing URLs). Give it a try.
+ 1. Optional: Follow [the Tweeter example project](https://github.com/firstdraft/tweeter) to enable followers/timeline. You'll find an accompanying video titled "Social Network" under "Additional Topics" in Canvas.
 
 [Here is a target for the optional parts of the assignment](https://photogram-final-target.herokuapp.com/) (file uploads, social network).
 
-## The skills covered in this assignment are relevant to 99% of your project ideas. Ask lots of questions and book office hours! Good luck!
+## The skills covered in this assignment are essential in 99% of apps. Ask lots of questions and book office hours! Good luck!
