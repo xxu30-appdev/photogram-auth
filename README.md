@@ -88,11 +88,10 @@ Below I suggest a plan of attack. Try to imagine, as you go through it, how each
  1. Set up a Cloud9 workspace as usual.
  1. `bin/setup`
  1. I've already added [starter_generators](https://guides.firstdraft.com/starter_generators.html) and [Devise](https://guides.firstdraft.com/authentication-and-authorization-with-devise.html) to the Gemfile. You might want to pull up those cheatsheets and have them handy.
- 1. Use the usual Continuous Integration workflow. You can go to `/rails/git` in Chrome to access the visual Git interface.
+ 1. You can navigate to `[YOUR APP PREVIEW URL]/git` in Chrome to access the visual Git interface; remember to commit and branch often so that you can always get back to a good state if an experiment goes wrong.
  1. Generate the User table [with Devise](https://guides.firstdraft.com/authentication-and-authorization-with-devise.html#generate-a-new-model-with-devise):
 
     ```bash
-    rails generate devise:install
     rails generate devise user username:string
     ```
 
@@ -106,6 +105,7 @@ Below I suggest a plan of attack. Try to imagine, as you go through it, how each
     rails generate starter:resource comment photo_id:integer body:text user_id:integer
     ```
 
+ 1. Set the homepage to the photos index page with `root "photos#index"` in `config/routes.rb`.
  1. Now that you have generated your model files, **add all of the associations and validations listed above immediately**.
  1. Set the root URL to the photos index page:
 
