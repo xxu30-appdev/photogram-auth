@@ -1,78 +1,79 @@
 require "rails_helper"
 
 feature "Users:" do
-
-  scenario "for new photo form, user ID prepopulated or in hidden field", points: 2 do
+  scenario "in routes.rb, 'get /users/:id' below 'devise_for :users'", points: 1 do
     user = create(:user)
     login_as(user, :scope => :user)
 
-    visit "/photos/new"
+    visit "/users/sign_in"
 
-    if page.has_selector?("label", text: "User")
-      expect(page).to have_selector("input[value='#{user.id}']")
-      expect(page).to have_field('User', with: "#{user.id}")
-    else
-      expect(page).not_to have_selector("label", text: "User")
-    end
+    expect(page.current_path).to eq "/"
   end
 
-  scenario "RCAV set for /users", points: 1 do
+  scenario "user_id pre-populated in new photo form", points: 2 do
     user = create(:user)
-    login_as(user, :scope => :user)
 
+    login_as(user, :scope => :user)
+    visit "/photos/new"
+
+    expect(page).to have_selector("input[value='#{user.id}']", visible: false)
+  end
+
+  scenario "RCAV dots connected for /users", points: 1 do
+    user = create(:user)
+
+    login_as(user, :scope => :user)
     visit "/users"
 
     expect(page.status_code).to be(200) # 200 is "OK"
   end
 
-  scenario "/users lists all users", points: 2 do
-    user_1 = create(:user)
-    user_2 = create(:user)
-    login_as(user_1, :scope => :user)
+  scenario "/users lists all users", points: 3 do
+    users = create_list(:user, 2)
 
+    login_as(users.first, :scope => :user)
     visit "/users"
 
-    users = User.all
     users.each do |user|
       expect(page).to have_content(user.username)
     end
   end
 
-  scenario "header includes link to /users", points: 1 do
+  scenario "navbar includes link to /users", points: 1 do
     user = create(:user)
-    login_as(user, :scope => :user)
 
+    login_as(user, :scope => :user)
     visit "/"
 
-    within('nav') do
-      expect(page).to have_link(nil, href: '/users')
+    within("nav") do
+      expect(page).to have_link(nil, href: "/users")
     end
   end
 
-  scenario "RCAV set for /users/:id", points: 1 do
+  scenario "RCAV dots connected for /users/:id", points: 1 do
     user = create(:user)
-    login_as(user, :scope => :user)
 
+    login_as(user, :scope => :user)
     visit "/users/#{user.id}"
 
     expect(page.status_code).to be(200) # 200 is "OK"
   end
 
-  scenario "/users/:id lists user's details", points: 1 do
+  scenario "/users/:id lists user's details", points: 2 do
     user = create(:user)
-    login_as(user, :scope => :user)
 
+    login_as(user, :scope => :user)
     visit "/users/#{user.id}"
 
     expect(page).to have_content(user.username)
   end
 
-  scenario "/users/:id lists user's photos caption", points: 2 do
+  scenario "/users/:id lists user's photos captions", points: 3 do
     user = create(:user)
-    photo_1 = FactoryBot.create(:photo, :user_id => user.id)
-    photo_2 = FactoryBot.create(:photo, :user_id => user.id)
-    login_as(user, :scope => :user)
+    photo_1 = create(:photo, :user_id => user.id)
+    photo_2 = create(:photo, :user_id => user.id)
 
+    login_as(user, :scope => :user)
     visit "/users/#{user.id}"
 
     photos = Photo.all
@@ -83,8 +84,8 @@ feature "Users:" do
 
   scenario "/users/:id lists user's photos", points: 2 do
     user = create(:user)
-    photo_1 = FactoryBot.create(:photo, :user_id => user.id)
-    photo_2 = FactoryBot.create(:photo, :user_id => user.id)
+    photo_1 = create(:photo, :user_id => user.id)
+    photo_2 = create(:photo, :user_id => user.id)
     login_as(user, :scope => :user)
 
     visit "/users/#{user.id}"
@@ -95,13 +96,13 @@ feature "Users:" do
     end
   end
 
-  scenario "when signed in header has link to /users/:id", points: 2 do
+  scenario "when signed in navbar has link to /users/:id", points: 2 do
     user = create(:user)
     login_as(user, :scope => :user)
 
     visit "/"
 
-    within('nav') do
+    within("nav") do
       expect(page).to have_link(nil, href: "/users/#{user.id}")
     end
   end
@@ -111,18 +112,8 @@ feature "Users:" do
 
     visit "/"
 
-    within('nav') do
+    within("nav") do
       expect(page).not_to have_link(nil, href: "/users/#{user.id}")
     end
   end
-
-  scenario "in routes.rb, /users/:id below 'devise_for :users'", points: 1 do
-    user = create(:user)
-    login_as(user, :scope => :user)
-
-    visit "/users/sign_in"
-
-    expect(page.current_path).to eq "/"
-  end
-
 end

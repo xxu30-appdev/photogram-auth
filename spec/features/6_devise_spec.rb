@@ -20,7 +20,7 @@ feature "Devise:" do
     fill_in("Username", :with => sample_username)
     click_on("Sign up")
 
-    within('nav') do
+    within("nav") do
       expect(page).to have_content(sample_username)
     end
   end
@@ -44,15 +44,8 @@ feature "Devise:" do
     fill_in("Current password", :with => user.password)
     click_on("Update")
 
-    within('nav') do
+    within("nav") do
       expect(page).to have_content(new_username)
     end
   end
-
-  scenario "sign-in form modified with Bootstrap class", points: 1, hint: h("class_must_match") do
-    visit "/"
-
-    expect(page).to have_selector(".form-group")
-  end
-
 end

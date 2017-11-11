@@ -1,71 +1,7 @@
 require "rails_helper"
 
-feature "My_likes:" do
-
-  scenario "RCAV set for /my_likes", points: 1 do
-    user = create(:user)
-    login_as(user, :scope => :user)
-
-    visit "/my_likes"
-
-    expect(page.status_code).to be(200) # 200 is "OK"
-  end
-
-  scenario "shows photos caption a user has liked", points: 1 do
-    user_1, user_2, user_3 = create_list(:user_with_photos, 3)
-
-    like_1 = FactoryBot.create(:like, :user_id => user_1.id, :photo_id => user_1.photos.first.id)
-    like_2 = FactoryBot.create(:like, :user_id => user_3.id, :photo_id => user_3.photos.first.id)
-    login_as(user_2, :scope => :user)
-    visit "/my_likes"
-
-    user_2.likes.each do |like|
-      expect(page).to have_content(like.photo.caption)
-    end
-  end
-
-  scenario "shows photos a user has liked", points: 1 do
-    user_1, user_2, user_3 = create_list(:user_with_photos, 3)
-
-    like_1 = FactoryBot.create(:like, :user_id => user_1.id, :photo_id => user_1.photos.first.id)
-    like_2 = FactoryBot.create(:like, :user_id => user_3.id, :photo_id => user_3.photos.first.id)
-    login_as(user_2, :scope => :user)
-    visit "/my_likes"
-
-    user_2.likes.each do |like|
-      expect(page).to have_css("img[src*='#{like.photo.image}']")
-    end
-  end
-
-  scenario "does not show photos caption a user hasn't liked", points: 1 do
-    user_1, user_2, user_3 = create_list(:user_with_photos, 3)
-
-    like_1 = FactoryBot.create(:like, :user_id => user_1.id, :photo_id => user_1.photos.first.id)
-    like_2 = FactoryBot.create(:like, :user_id => user_3.id, :photo_id => user_3.photos.first.id)
-
-    login_as(user_2, :scope => :user)
-    visit "/my_likes"
-
-    user_1.likes.each do |like|
-      expect(page).not_to have_content(like.photo.caption)
-    end 
-  end
-
-  scenario "does not show photos a user hasn't liked", points: 1 do
-    user_1, user_2, user_3 = create_list(:user_with_photos, 3)
-
-    like_1 = FactoryBot.create(:like, :user_id => user_1.id, :photo_id => user_1.photos.first.id)
-    like_2 = FactoryBot.create(:like, :user_id => user_3.id, :photo_id => user_3.photos.first.id)
-
-    login_as(user_2, :scope => :user)
-    visit "/my_likes"
-
-    user_1.likes.each do |like|
-      expect(page).not_to have_css("img[src*='#{like.photo.image}']")
-    end 
-  end
-
-  scenario "header has link to /my_likes", points: 1 do
+feature "My Likes:" do
+  scenario "navbar has link to /my_likes", points: 1 do
     user = create(:user)
     login_as(user, :scope => :user)
 
@@ -76,4 +12,72 @@ feature "My_likes:" do
     end
   end
 
+  scenario "RCAV dots connected for /my_likes", points: 1 do
+    user = create(:user)
+    login_as(user, :scope => :user)
+
+    visit "/my_likes"
+
+    expect(page.status_code).to be(200) # 200 is "OK"
+  end
+
+  scenario "shows the captions of photos a user has liked", points: 3 do
+    alice = create(:user_with_photos)
+    bob = create(:user_with_photos)
+    carol = create(:user_with_photos)
+
+    create(:like, :user => alice, :photo => bob.photos.first)
+    create(:like, :user => alice, :photo => carol.photos.first)
+
+    login_as(alice, :scope => :user)
+    visit "/my_likes"
+
+    alice.likes.each do |like|
+      expect(page).to have_content(like.photo.caption)
+    end
+  end
+
+  scenario "shows the images a user has liked", points: 2 do
+    alice = create(:user_with_photos)
+    bob = create(:user_with_photos)
+    carol = create(:user_with_photos)
+
+    create(:like, :user => alice, :photo => bob.photos.first)
+    create(:like, :user => alice, :photo => carol.photos.first)
+
+    login_as(alice, :scope => :user)
+    visit "/my_likes"
+
+    alice.likes.each do |like|
+      expect(page).to have_css("img[src*='#{like.photo.image}']")
+    end
+  end
+
+  scenario "does not show the captions of photos a user hasn't liked", points: 3 do
+    alice = create(:user_with_photos)
+    bob = create(:user_with_photos)
+    carol = create(:user_with_photos)
+
+    create(:like, :user => alice, :photo => bob.photos.first)
+    create(:like, :user => alice, :photo => carol.photos.first)
+
+    login_as(alice, :scope => :user)
+    visit "/my_likes"
+
+    expect(page).not_to have_content(alice.photos.first.caption)
+  end
+
+  scenario "does not show images a user hasn't liked", points: 2 do
+    alice = create(:user_with_photos)
+    bob = create(:user_with_photos)
+    carol = create(:user_with_photos)
+
+    create(:like, :user => alice, :photo => bob.photos.first)
+    create(:like, :user => alice, :photo => carol.photos.first)
+
+    login_as(alice, :scope => :user)
+    visit "/my_likes"
+
+    expect(page).not_to have_css("img[src*='#{alice.photos.first.image}']")
+  end
 end

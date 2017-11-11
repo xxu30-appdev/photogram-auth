@@ -1,10 +1,11 @@
 require "rails_helper"
 
-feature "Devise" do
+feature "Setup:" do
   scenario "root url set to photos index", points: 1 do
     user = create(:user)
 
     visit "/"
+
     if page.has_selector?("label", text: "Email")
       fill_in("Email", :with => user.email)
       fill_in("Password", :with => user.password)
@@ -16,11 +17,7 @@ feature "Devise" do
 
   scenario "user authentication required for home page", points: 2 do
     visit "/"
-    expect(page.current_path).to eq("/users/sign_in")
-  end
 
-  scenario "user authentication required for likes page", points: 1 do
-    visit "/likes"
     expect(page.current_path).to eq("/users/sign_in")
   end
 
@@ -34,5 +31,4 @@ feature "Devise" do
 
     expect(page).to have_content("Signed in successfully.")
   end
-
 end

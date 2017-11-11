@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :photo do
-    image { Faker::Avatar.image }
-    caption "Lake Bondhus"
+    sequence(:image) { |n| "https://some.url/image#{n}.png" }
+    sequence(:caption) { |n| "Some caption #{n}" }
   end
 end
