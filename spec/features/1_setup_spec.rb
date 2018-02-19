@@ -1,7 +1,7 @@
 require "rails_helper"
 
-feature "Setup:" do
-  scenario "root url set to photos index", points: 1 do
+describe "homepage" do
+  it "root url set to photos index", points: 1 do
     user = create(:user)
 
     visit "/"
@@ -14,14 +14,18 @@ feature "Setup:" do
 
     expect(page).to have_link(nil, href: "/photos/new")
   end
+end
 
-  scenario "user authentication required for home page", points: 2 do
+describe "homepage" do
+  it "user authentication required for home page", points: 2 do
     visit "/"
 
     expect(page.current_path).to eq("/users/sign_in")
   end
+end
 
-  scenario "login form works", points: 1 do
+describe "/users/sign_in" do
+  it "login form works", points: 1 do
     user = create(:user)
 
     visit "/"

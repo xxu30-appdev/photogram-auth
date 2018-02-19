@@ -1,14 +1,15 @@
 require "rails_helper"
 
-feature "Devise:" do
-
-  scenario "sign-up form has username field", points: 1, hint: h("label_for_input") do
+describe "/users/sign_up" do
+  it "sign-up form has username field", points: 1, hint: h("label_for_input") do
     visit "/users/sign_up"
 
     expect(page).to have_selector("label", text: "Username")
   end
+end
 
-  scenario "sign-up form username field works", points: 2, hint: h("label_for_input") do
+describe "/users/sign_up" do
+  it "sign-up form username field works", points: 2, hint: h("label_for_input") do
     sample_email = "alice@example.com"
     sample_password = "alicepassword"
     sample_username = "alice"
@@ -24,8 +25,10 @@ feature "Devise:" do
       expect(page).to have_content(sample_username)
     end
   end
+end
 
-  scenario "edit form has username field", points: 1, hint: h("label_for_input") do
+describe "/users/edit" do
+  it "edit form has username field", points: 1, hint: h("label_for_input") do
     user = create(:user)
     login_as(user, :scope => :user)
 
@@ -33,8 +36,10 @@ feature "Devise:" do
 
     expect(page).to have_selector("label", text: "Username")
   end
+end
 
-  scenario "edit form username field works", points: 2, hint: h("label_for_input") do
+describe "/users/edit" do
+  it "edit form username field works", points: 2, hint: h("label_for_input") do
     user = create(:user)
     login_as(user, :scope => :user)
     new_username = "User-#{Time.now.to_f}"

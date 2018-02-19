@@ -1,6 +1,6 @@
 require "rails_helper"
 
-feature "Photos Index:" do
+describe "/photos" do
   it "only shows edit link for signed-in user's photos", points: 3 do
     owner = create(:user_with_photos)
     non_owner = create(:user_with_photos)
@@ -16,7 +16,9 @@ feature "Photos Index:" do
       expect(page).not_to have_link(nil, href: "/photos/#{photo.id}/edit")
     end
   end
+end
 
+describe "/photos" do
   it "only shows delete link for signed-in user's photos", points: 2 do
     owner = create(:user_with_photos)
     non_owner = create(:user_with_photos)
@@ -32,7 +34,9 @@ feature "Photos Index:" do
       expect(page).not_to have_link(nil, href: "/delete_photo/#{photo.id}")
     end
   end
+end
 
+describe "/photos" do
   it "has 'Add Photo' link", points: 1 do
     user = create(:user)
 
@@ -41,7 +45,9 @@ feature "Photos Index:" do
 
     expect(page).to have_link("Add Photo", href: "/photos/new")
   end
+end
 
+describe "/photos" do
   it "'Photos' h1 element should not present", points: 1 do
     user = create(:user)
 
@@ -50,7 +56,9 @@ feature "Photos Index:" do
 
     expect(page).not_to have_selector("h1", text: "Photos")
   end
+end
 
+describe "/photos" do
   it "displays photos", points: 2 do
     users = create_list(:user_with_photos, 3)
     photos = Photo.all
@@ -62,7 +70,9 @@ feature "Photos Index:" do
       expect(page).to have_css("img[src*='#{photo.image}']")
     end
   end
+end
 
+describe "/photos" do
   it "displays submitters' usernames", points: 3 do
     users = create_list(:user_with_photos, 3)
     photos = Photo.all
@@ -74,7 +84,9 @@ feature "Photos Index:" do
       expect(page).to have_content("#{photo.user.username}")
     end
   end
+end
 
+describe "/photos" do
   it "displays time elapsed since posting photos", points: 1, hint: h("time_in_words") do
     users = create_list(:user_with_photos, 3)
     photos = Photo.all
@@ -86,7 +98,9 @@ feature "Photos Index:" do
       expect(page).to have_content(ApplicationController.helpers.time_ago_in_words(photo.created_at))
     end
   end
+end
 
+describe "/photos" do
   it "lists comments in each photo", points: 1 do
     user_1, user_2, user_3 = create_list(:user_with_photos, 3)
 
@@ -103,7 +117,9 @@ feature "Photos Index:" do
       end
     end
   end
+end
 
+describe "/photos" do
   it "lists comments with authors", points: 1 do
     user_1, user_2, user_3 = create_list(:user_with_photos, 3)
 
@@ -120,7 +136,9 @@ feature "Photos Index:" do
       end
     end
   end
+end
 
+describe "/photos" do
   it "includes form field with placeholder 'Add a comment...'", points: 1 do
     user = create(:user)
     login_as(user, :scope => :user)
@@ -130,7 +148,9 @@ feature "Photos Index:" do
 
     expect(page).to have_selector("input[placeholder='Add a comment...']")
   end
+end
 
+describe "/photos" do
   it "quick-add a comment should add comment", points: 2 do
     user_1 = create(:user_with_photos)
     user_2 = create(:user)
@@ -144,7 +164,9 @@ feature "Photos Index:" do
 
     expect(page).to have_content(new_comment)
   end
+end
 
+describe "/photos" do
   it "after adding a comment page it should leads back to /photos", points: 2 do
     user_1 = create(:user_with_photos)
     user_2 = create(:user)
@@ -158,7 +180,9 @@ feature "Photos Index:" do
 
     expect(page).to have_current_path("/photos")
   end
+end
 
+describe "/photos" do
   it "quick-add a comment sets the author correctly", points: 1, hint: h("display_id_or_username")  do
     user_1 = create(:user_with_photos)
     user_2 = create(:user)
@@ -180,7 +204,9 @@ feature "Photos Index:" do
       end
     end
   end
+end
 
+describe "/photos" do
   it "shows Like/Unlike buttons", points: 1 do
     user_1 = create(:user_with_photos)
     user_2 = create(:user_with_photos)
@@ -195,7 +221,9 @@ feature "Photos Index:" do
 
     expect(page).to have_link("Unlike", href: "/delete_like/#{like_1.id}")
   end
+end
 
+describe "/photos" do
   it "displays a link to unlike a photo after liking a photo", points: 2 do
     user = create(:user)
     photo = create(:photo, :user_id => user.id)
@@ -206,7 +234,9 @@ feature "Photos Index:" do
 
     expect(page).to have_link("Unlike", href: "/delete_like/#{photo.likes.first.id}")
   end
+end
 
+describe "/photos" do
   it "displays a link to like a photo after unliking a photo", points: 1 do
     user = create(:user_with_photos)
 
