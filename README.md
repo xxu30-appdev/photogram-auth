@@ -155,7 +155,7 @@ Below I suggest a plan of attack. Try to imagine, as you go through it, how each
 
  1. On the photo show and index pages, I should only see the "Edit" and "Delete" buttons if it is my own photo.
 
- 1. Optionally, improve the styling.
+ 1. Optionally: Improve the styling.
 
  1. **Make the form to quick-add a comment directly below a photo work.**
  1. **Make the heart to quick-add/delete a like directly below a photo work.**
