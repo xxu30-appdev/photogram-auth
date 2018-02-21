@@ -96,9 +96,9 @@ Below I suggest a plan of attack. Try to imagine, as you go through it, how each
     rails generate devise user username:string
     ```
 
-    Devise will automatically add email, password, and all the other columns that it needs to secure accounts. You just specify any additional columns you want besides those (in this case, we only want usernames).
+    Devise will automatically add email, password, and all the other columns that it needs to secure accounts. You just specify any additional columns you want besides those (in this case, we only want username additionally).
 
- 1. Generate the rest of your CRUD resources [with starter_generators](https://guides.firstdraft.com/draftgenerators.html#resources):
+ 1. Generate the rest of your CRUD resources [with draft_generators](https://guides.firstdraft.com/draftgenerators.html#resources):
 
     ```bash
     rails generate draft:resource photo caption:text image:string user_id:integer
@@ -139,13 +139,13 @@ Below I suggest a plan of attack. Try to imagine, as you go through it, how each
 
  1. Sign in with one of the seeded users; you can use `alice@example.com`, `bob@example.com`, or `carol@example.com`. All of the passwords are `password`.
 
- 1. Fix the dummy edit profile and sign-out links in the navbar.
+ 1. Add edit profile and sign-out links to the navbar.
     - If there is currently a signed-in user,
        - The link to edit profile should display the signed-in user's username instead.
-       - The link to sign out should work as is, but remove the word "dummy".
+       - Don't forget the `data-method="delete"` attribute on the "Sign Out" link.
     - If not, display links to sign-in (`/users/sign_in`) and sign-up (`/users/sign_up`) instead.
 
- 1. On the new photo form, the user should not have to provide their ID number. Fix it using Devise's `current_user` helper method to prepopulate that input.
+ 1. On the new photo form, the user should not have to provide their ID number. Fix it using Devise's `current_user` helper method to pre-populate that input.
 
  1. Create an RCAV: When I visit `/users`, I should see an index of all users. This RCAV does not exist right now, since we used Devise to generate the User resource rather than starter_generators. Devise only builds the RCAVs required for sign-up/sign-in/sign-out/etc; it doesn't build the standard Golden Seven. But that's okay, because we can easily add the ones that we want ourselves (if any). Once done, add a link to the navbar.
 
