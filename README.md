@@ -85,10 +85,10 @@ Below I suggest a plan of attack. Try to imagine, as you go through it, how each
 
 ## Steps
 
- 1. Set up a Cloud9 workspace as usual.
+ 1. Download the code to your Cloud9 workspace as usual.
  1. `bin/setup`
- 1. `bin/server` or click "Run Project", navigate to the live app, and verify that it's a blank application with nothing in it yet.
- 1. I've already added [starter_generators](https://guides.firstdraft.com/starter_generators.html) and [Devise](https://guides.firstdraft.com/authentication-and-authorization-with-devise.html) to the Gemfile. You might want to pull up those cheatsheets and have them handy.
+ 1. `bin/server`, navigate to the preview, and verify that it's a blank application with nothing in it yet.
+ 1. I've already added [draft_generators](https://guides.firstdraft.com/draftgenerators.html) and [Devise](https://guides.firstdraft.com/authentication-and-authorization-with-devise.html) to the Gemfile. You might want to pull up those cheatsheets and have them handy.
  1. You can navigate to `[YOUR APP PREVIEW URL]/git` in Chrome to access the visual Git interface; remember to commit and branch often so that you can always get back to a good state if an experiment goes wrong.
  1. Generate the User table [with Devise](https://guides.firstdraft.com/authentication-and-authorization-with-devise.html#generate-a-new-model-with-devise):
 
@@ -98,12 +98,12 @@ Below I suggest a plan of attack. Try to imagine, as you go through it, how each
 
     Devise will automatically add email, password, and all the other columns that it needs to secure accounts. You just specify any additional columns you want besides those (in this case, we only want usernames).
 
- 1. Generate the rest of your CRUD resources [with starter_generators](https://guides.firstdraft.com/starter_generators.html#resources):
+ 1. Generate the rest of your CRUD resources [with starter_generators](https://guides.firstdraft.com/draftgenerators.html#resources):
 
     ```bash
-    rails generate starter:resource photo caption:text image:string user_id:integer
-    rails generate starter:resource like user_id:integer photo_id:integer
-    rails generate starter:resource comment photo_id:integer body:text user_id:integer
+    rails generate draft:resource photo caption:text image:string user_id:integer
+    rails generate draft:resource like user_id:integer photo_id:integer
+    rails generate draft:resource comment photo_id:integer body:text user_id:integer
     ```
 
  1. Now that you have generated your model files, **add all of the associations and validations listed above immediately**.
@@ -115,10 +115,10 @@ Below I suggest a plan of attack. Try to imagine, as you go through it, how each
     ```
 
  1. Finally, click through your app preview to see your work so far. If you haven't `rails db:migrate`d yet, it will ask you to now.
- 1. Generate [a better application layout](https://guides.firstdraft.com/starter_generators.html#application-layout), including Bootstrap:
+ 1. Generate [a better application layout](https://guides.firstdraft.com/draftgenerators.html#application-layout), including Bootstrap:
 
     ```bash
-    rails generate starter:style paper
+    rails generate draft:layout
     ```
 
  1. I've included some random starter data for you to use while developing:
@@ -155,11 +155,7 @@ Below I suggest a plan of attack. Try to imagine, as you go through it, how each
 
  1. On the photo show and index pages, I should only see the "Edit" and "Delete" buttons if it is my own photo.
 
- 1. Make the photos look like [the target](https://photogram-auth-target.herokuapp.com/photos):
-    - Useful Bootstrap things: [panel with heading](http://getbootstrap.com/components/#panels-heading), [media list](http://getbootstrap.com/components/#media-list), [img-responsive](http://getbootstrap.com/css/#images-responsive), [text-muted](http://getbootstrap.com/css/#helper-classes-colors), [heading subtext](http://getbootstrap.com/css/#type-headings)
-    - Useful Rails methods: [time_ago_in_words](http://apidock.com/rails/ActionView/Helpers/DateHelper/time_ago_in_words), [.pluck](http://guides.rubyonrails.org/active_record_querying.html#pluck), [.to_sentence](http://apidock.com/rails/Array/to_sentence)
-
-   View Source on the target if you need to.
+ 1. Optionally, improve the styling.
 
  1. **Make the form to quick-add a comment directly below a photo work.**
  1. **Make the heart to quick-add/delete a like directly below a photo work.**
