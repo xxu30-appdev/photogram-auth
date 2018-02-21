@@ -52,17 +52,24 @@ namespace :dev do
 
     users.each do |user|
       photo_info.each do |photo_hash|
-        photos << user.photos.find_or_create_by(photo_hash)
+        p = Photo.new
+        p.user_id = user.id
+        p.image = photo_hash.fetch(:image)
+        p.caption = photo_hash.fetch(:caption)
+        p.save
+
+        photos << p
       end
     end
 
     puts "There are now #{Photo.count} photos in the database."
 
     photos.each do |photo|
-      if photo.comments.count < 1
+      if Comment.where(:photo_id => photo.id).count < 1
         rand(6).times do
-          comment = photo.comments.build
-          comment.user = users.sample
+          comment = Comment.new
+          comment.photo_id = photo.id
+          comment.user_id = users.sample.id
           comment.body = Faker::Hacker.say_something_smart
           comment.save
         end
@@ -73,8 +80,9 @@ namespace :dev do
 
     photos.each do |photo|
       users.sample(rand(users.count)).each do |user|
-        like = photo.likes.build
-        like.user = user
+        like = Like.new
+        like.photo_id = photo.id
+        like.user_id = user.id
         like.save
       end
     end
