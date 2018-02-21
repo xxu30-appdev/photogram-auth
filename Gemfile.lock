@@ -170,12 +170,12 @@ GEM
     mime-types (3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
-    mini_portile2 (2.1.0)
+    mini_portile2 (2.3.0)
     minitest (5.10.2)
     multi_json (1.12.1)
     nio4r (2.0.0)
-    nokogiri (1.7.2)
-      mini_portile2 (~> 2.1.0)
+    nokogiri (1.8.2)
+      mini_portile2 (~> 2.3.0)
     octicons (5.0.5)
       nokogiri (>= 1.6.3.1)
     octicons_helper (4.0.7)
@@ -341,4 +341,4 @@ DEPENDENCIES
   webmock
 
 BUNDLED WITH
-   1.16.0
+   1.16.1
