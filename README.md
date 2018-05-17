@@ -87,7 +87,8 @@ Below I suggest a plan of attack. Try to imagine, as you go through it, how each
 
  1. Download the code to your Cloud9 workspace as usual.
  1. `bin/setup`
- 1. `bin/server`, navigate to the preview, and verify that it's a blank application with nothing in it yet.
+ 1. Click the Run Project button.
+ 1. Navigate to the app preview in Chrome and verify that it works.
  1. I've already added [draft_generators](https://guides.firstdraft.com/draftgenerators.html) and [Devise](https://guides.firstdraft.com/authentication-and-authorization-with-devise.html) to the Gemfile. You might want to pull up those cheatsheets and have them handy.
  1. You can navigate to `[YOUR APP PREVIEW URL]/git` in Chrome to access the visual Git interface; remember to commit and branch often so that you can always get back to a good state if an experiment goes wrong.
  1. Generate the User table [with Devise](https://guides.firstdraft.com/authentication-and-authorization-with-devise.html#generate-a-new-model-with-devise):
