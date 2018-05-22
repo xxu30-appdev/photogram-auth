@@ -9,7 +9,7 @@ describe "homepage" do
     if page.has_selector?("label", text: "Email")
       fill_in("Email", :with => user.email)
       fill_in("Password", :with => user.password)
-      click_on("Log in")
+      click_on("Sign in")
     end
 
     expect(page).to have_link(nil, href: "/photos/new")
@@ -31,7 +31,7 @@ describe "/users/sign_in" do
     visit "/"
     fill_in("Email", :with => user.email)
     fill_in("Password", :with => user.password)
-    click_on("Log in")
+    click_on("Sign in")
 
     expect(page).to have_content("Signed in successfully.")
   end

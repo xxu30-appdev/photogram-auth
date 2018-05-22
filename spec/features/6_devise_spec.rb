@@ -19,7 +19,7 @@ describe "/users/sign_up" do
     fill_in("Password", :with => sample_password)
     fill_in("Password confirmation", :with => sample_password)
     fill_in("Username", :with => sample_username)
-    click_on("Sign up")
+    click_on("Create User")
 
     within("nav") do
       expect(page).to have_content(sample_username)
