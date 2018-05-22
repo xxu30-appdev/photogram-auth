@@ -94,7 +94,7 @@ Below I suggest a plan of attack. Try to imagine, as you go through it, how each
  1. Generate the User table [with Devise](https://guides.firstdraft.com/authentication-and-authorization-with-devise.html#generate-a-new-model-with-devise):
 
     ```bash
-    rails generate devise user username:string
+    rails generate draft:devise user username:string
     ```
 
     Devise will automatically add email, password, and all the other columns that it needs to secure accounts. You just specify any additional columns you want besides those (in this case, we only want username additionally).
@@ -160,7 +160,7 @@ Below I suggest a plan of attack. Try to imagine, as you go through it, how each
 
  1. **Make the form to quick-add a comment directly below a photo work.**
  1. **Make the heart to quick-add/delete a like directly below a photo work.**
- 1. [Customize the generated sign-in/sign-out/edit profile forms](https://guides.firstdraft.com/authentication-and-authorization-with-devise.html#customizing-devise-views) to a) include a field for username, b) make them look nicer. [Here are some Bootstrapped Devise forms that you can build off of](https://github.com/firstdraft/bootstrapped_devise_forms), but you need to add a field for username, and then [let that param through additional security](https://guides.firstdraft.com/authentication-and-authorization-with-devise.html#step-three-allow-additional-parameters-through-security) before the form will work.
+ 1. [Customize the generated sign-in/sign-out/edit profile forms](https://guides.firstdraft.com/authentication-and-authorization-with-devise.html#customizing-devise-views) to to make them look nicer. [Here are some Bootstrapped Devise forms that you can build off of](https://github.com/firstdraft/bootstrapped_devise_forms)
 
  1. Optional: On Canvas under "Additional Topics" there is a video and written guide to using the CarrierWave gem to enable image uploads (rather than pasting in existing URLs). Give it a try.
  1. Optional: Follow [the Tweeter example project](https://github.com/firstdraft/tweeter) to enable followers/timeline. You'll find an accompanying video titled "Social Network" under "Additional Topics" in Canvas.
