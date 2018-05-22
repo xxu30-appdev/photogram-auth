@@ -160,7 +160,6 @@ Below I suggest a plan of attack. Try to imagine, as you go through it, how each
 
  1. **Make the form to quick-add a comment directly below a photo work.**
  1. **Make the heart to quick-add/delete a like directly below a photo work.**
- 1. [Customize the generated sign-in/sign-out/edit profile forms](https://guides.firstdraft.com/authentication-and-authorization-with-devise.html#customizing-devise-views) to to make them look nicer. [Here are some Bootstrapped Devise forms that you can build off of](https://github.com/firstdraft/bootstrapped_devise_forms)
 
  1. Optional: On Canvas under "Additional Topics" there is a video and written guide to using the CarrierWave gem to enable image uploads (rather than pasting in existing URLs). Give it a try.
  1. Optional: Follow [the Tweeter example project](https://github.com/firstdraft/tweeter) to enable followers/timeline. You'll find an accompanying video titled "Social Network" under "Additional Topics" in Canvas.
