@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/firstdraft/console_ip_whitelist.git
-  revision: 1af14f91522076488454c29d101aa8d544ce38f9
+  revision: 7ee6da47984855d9a39f5de1f20bd062f3eedcd5
   specs:
     console_ip_whitelist (0.1.0)
       rails
@@ -22,7 +22,7 @@ GIT
 
 GIT
   remote: https://github.com/firstdraft/draft_log.git
-  revision: 724a04c4eeb4f8f2ba9d2d641eb770cb6d59ee22
+  revision: daea8ecad43fde862432dd5edcf79d4c8b3f807d
   specs:
     draft_log (0.0.0)
       awesome_print
