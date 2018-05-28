@@ -36,7 +36,8 @@ describe "/my_likes" do
     login_as(alice, :scope => :user)
     visit "/my_likes"
 
-    alice.likes.each do |like|
+    likes = Like.where(:user_id => alice.id)
+    likes.each do |like|
       expect(page).to have_content(like.photo.caption)
     end
   end
@@ -54,7 +55,8 @@ describe "/my_likes" do
     login_as(alice, :scope => :user)
     visit "/my_likes"
 
-    alice.likes.each do |like|
+    likes = Like.where(:user_id => alice.id)
+    likes.each do |like|
       expect(page).to have_css("img[src*='#{like.photo.image}']")
     end
   end

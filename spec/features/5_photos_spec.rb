@@ -8,11 +8,13 @@ describe "/photos" do
     login_as(owner, :scope => :user)
     visit "/photos"
 
-    owner.photos.each do |photo|
+    owner_photos = Photo.where(:user_id => owner.id)
+    owner_photos.each do |photo|
       expect(page).to have_link(nil, href: "/photos/#{photo.id}/edit")
     end
 
-    non_owner.photos.each do |photo|
+    non_owner_photos = Photo.where(:user_id => non_owner.id)
+    non_owner_photos.each do |photo|
       expect(page).not_to have_link(nil, href: "/photos/#{photo.id}/edit")
     end
   end
@@ -26,11 +28,13 @@ describe "/photos" do
     login_as(owner, :scope => :user)
     visit "/photos"
 
-    owner.photos.each do |photo|
+    owner_photos = Photo.where(:user_id => owner.id)
+    owner_photos.each do |photo|
       expect(page).to have_link(nil, href: "/delete_photo/#{photo.id}")
     end
 
-    non_owner.photos.each do |photo|
+    non_owner_photos = Photo.where(:user_id => non_owner.id)
+    non_owner_photos.each do |photo|
       expect(page).not_to have_link(nil, href: "/delete_photo/#{photo.id}")
     end
   end
