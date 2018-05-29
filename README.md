@@ -54,6 +54,7 @@ Suppose we design the following domain model for our application:
      - Users have many comments, a comment belongs to a user
      - Users have many likes, a like belongs to a user
      - Photos have many likes, a like belongs to a photo
+       > If you choose to use association helpers, it might be useful to use the dependent destroy option, e.g `has_many :likes, :dependent => :destroy`, which makes sure that when a photo gets destroyed, all of it's associated like are also destroyed. This will prevent errors that arise from missing data. 
      - Users have many `liked_photos` through likes. Since this breaks naming conventions (the method name, `.liked_photos`, does not exactly match the class name, `Photo`), we'll have to write out the full form of the has_many/through:
 
         ```ruby
