@@ -54,7 +54,7 @@ Suppose we design the following domain model for our application:
      - Users have many comments, a comment belongs to a user
      - Users have many likes, a like belongs to a user
      - Photos have many likes, a like belongs to a photo
-       > If you choose to use association helpers, it might be useful to use the dependent destroy option, e.g `has_many :likes, :dependent => :destroy`, which makes sure that when a photo gets destroyed, all of it's associated like are also destroyed. This will prevent errors that arise from missing data. 
+       > If you choose to use association helpers, it might be useful to use the dependent destroy option, e.g `has_many :likes, :dependent => :destroy`, which makes sure that when a photo gets destroyed, all of it's associated like are also destroyed. This will prevent errors that arise from missing data.
      - Users have many `liked_photos` through likes. Since this breaks naming conventions (the method name, `.liked_photos`, does not exactly match the class name, `Photo`), we'll have to write out the full form of the has_many/through:
 
         ```ruby
@@ -86,12 +86,11 @@ Below I suggest a plan of attack. Try to imagine, as you go through it, how each
 
 ## Steps
 
- 1. Download the code to your Cloud9 workspace as usual.
- 1. `bin/setup`
- 1. Click the Run Project button.
- 1. Navigate to the app preview in Chrome and verify that it works.
+ 1. From [your Cloud9 repositories list](https://c9.io/account/repos), set up a workspace [as usual](https://guides.firstdraft.com/starting-on-a-project-in-cloud9).
+ 1. Set up the project: `bin/setup`
+ 1. Start the web server by clicking "Run Project".
+ 1. Navigate to your live application preview.
  1. I've already added [draft_generators](https://guides.firstdraft.com/draftgenerators.html) and [Devise](https://guides.firstdraft.com/authentication-and-authorization-with-devise.html) to the Gemfile. You might want to pull up those cheatsheets and have them handy.
- 1. You can navigate to `[YOUR APP PREVIEW URL]/git` in Chrome to access the visual Git interface; remember to commit and branch often so that you can always get back to a good state if an experiment goes wrong.
  1. Generate the User table [with Devise](https://guides.firstdraft.com/authentication-and-authorization-with-devise.html#generate-a-new-model-with-devise):
 
     ```bash
@@ -164,7 +163,10 @@ Below I suggest a plan of attack. Try to imagine, as you go through it, how each
 
  1. Optional: On Canvas under "Additional Topics" there is a video and written guide to using the CarrierWave gem to enable image uploads (rather than pasting in existing URLs). Give it a try.
  1. Optional: Follow [the Tweeter example project](https://github.com/firstdraft/tweeter) to enable followers/timeline. You'll find an accompanying video titled "Social Network" under "Additional Topics" in Canvas.
+ 1. As you work, remember to navigate to `/git` and **commit often as you work.**
+ 1. Make new branches freely to experiment! _Especially_ before starting on a new task.
+ 1. Run `rails grade` as often as you like to see how you are doing, but **make sure you test your app manually first to make sure it matches the target's behavior first**.
 
-[Here is a target for the optional parts of the assignment](https://photogram-final-target.herokuapp.com/) (file uploads, social network).
+#### [Here is a target for the OPTIONAL parts of the assignment](https://photogram-final-target.herokuapp.com/) (file uploads, social network).
 
 ## The skills covered in this assignment are essential in 99% of apps. Ask lots of questions and book office hours! Good luck!
