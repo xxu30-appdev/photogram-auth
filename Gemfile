@@ -51,22 +51,22 @@ end
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 group :development, :test do
-  gem "faker"
-  gem "dotenv-rails"
-  gem "pry-rails"
-  gem "grade_runner", github: "firstdraft/grade_runner"
-  gem "web_git", github: "firstdraft/web_git"
-  gem "database_cleaner"
-  gem "console_ip_whitelist", github: "firstdraft/console_ip_whitelist"
-  gem "draft_log", github: "firstdraft/draft_log"
   gem "better_errors"
+  gem "binding_of_caller"
+  gem "console_ip_whitelist", github: "firstdraft/console_ip_whitelist"
+  gem "database_cleaner"
+  gem "draft_log", github: "firstdraft/draft_log"
+  gem "dotenv-rails"
+  gem "faker"
+  gem "grade_runner", github: "firstdraft/grade_runner"
+  gem "pry-rails", github: "r-obert/pry-rails", branch: "v0.12-prompt_support"
+  gem "web_git", github: "firstdraft/web_git"
 end
 
 group :development do
   gem "annotate"
   gem "awesome_print"
   gem "dev_toolbar", git: "https://github.com/firstdraft/dev_toolbar.git"
-  gem "binding_of_caller"
   gem "draft_generators", github: "firstdraft/draft_generators"
   gem "letter_opener"
   gem "meta_request"
