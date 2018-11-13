@@ -45,14 +45,6 @@ GIT
       turbolinks (~> 5)
       tzinfo-data
 
-GIT
-  remote: https://github.com/r-obert/pry-rails.git
-  revision: a20b2976755e271f3ac10ff3bc52d924c69d992e
-  branch: v0.12-prompt_support
-  specs:
-    pry-rails (0.3.6)
-      pry (>= 0.10.4)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -202,9 +194,11 @@ GEM
       octicons (= 8.1.0)
       rails
     orm_adapter (0.5.0)
-    pry (0.12.0)
+    pry (0.12.2)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
+    pry-rails (0.3.7)
+      pry (>= 0.10.4)
     public_suffix (3.0.3)
     rack (2.0.6)
     rack-contrib (2.1.0)
@@ -347,7 +341,7 @@ DEPENDENCIES
   letter_opener
   listen (~> 3.0.5)
   meta_request
-  pry-rails!
+  pry-rails
   rails (= 5.0.2)
   rspec-rails
   sass-rails (~> 5.0)

@@ -99,6 +99,8 @@ Below I suggest a plan of attack. Try to imagine, as you go through it, how each
 
     Devise will automatically add email, password, and all the other columns that it needs to secure accounts. You just specify any additional columns you want besides those (in this case, we only want username additionally).
 
+    **If you see the error `undefined method session_path` after doing this step, then you need to restart your server.**
+
  1. Generate the rest of your CRUD resources [with draft_generators](https://guides.firstdraft.com/draftgenerators.html#resources):
 
     ```bash
