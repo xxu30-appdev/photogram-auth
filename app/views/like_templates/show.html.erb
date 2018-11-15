@@ -1,0 +1,58 @@
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
+    <h1>
+      Like #<%= @like.id %> details
+    </h1>
+
+    <div class="row mb-3">
+      <div class="col">
+        <a href="/likes" class="btn btn-block btn-outline-secondary">
+          Go back
+        </a>
+      </div>
+
+      <div class="col">
+        <a href="/likes/<%= @like.id %>/edit" class="btn btn-block btn-outline-secondary">
+          Edit like
+        </a>
+      </div>
+
+      <div class="col">
+        <a href="/delete_like/<%= @like.id %>" class="btn btn-block btn-outline-secondary">
+          Delete like
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        User
+      </dt>
+      <dd>
+        <%= @like.user_id %>
+      </dd>
+
+      <dt>
+        Photo
+      </dt>
+      <dd>
+        <%= @like.photo_id %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@like.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@like.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+

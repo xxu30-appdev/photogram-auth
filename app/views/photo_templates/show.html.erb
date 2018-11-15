@@ -1,0 +1,65 @@
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
+    <h1>
+      Photo #<%= @photo.id %> details
+    </h1>
+
+    <div class="row mb-3">
+      <div class="col">
+        <a href="/photos" class="btn btn-block btn-outline-secondary">
+          Go back
+        </a>
+      </div>
+
+      <div class="col">
+        <a href="/photos/<%= @photo.id %>/edit" class="btn btn-block btn-outline-secondary">
+          Edit photo
+        </a>
+      </div>
+
+      <div class="col">
+        <a href="/delete_photo/<%= @photo.id %>" class="btn btn-block btn-outline-secondary">
+          Delete photo
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Caption
+      </dt>
+      <dd>
+        <%= @photo.caption %>
+      </dd>
+
+      <dt>
+        Image
+      </dt>
+      <dd>
+        <%= @photo.image %>
+      </dd>
+
+      <dt>
+        User
+      </dt>
+      <dd>
+        <%= @photo.user_id %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@photo.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@photo.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
