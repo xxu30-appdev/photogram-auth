@@ -1,15 +1,15 @@
 Rails.application.routes.draw do
   # Routes for the Comment resource:
-  
-  root "photos#index"
-  
+ root "photos#index" 
+  #root "photos#index"
+ #root "photos#index"
     # CREATE
   #get("/users/new", { :controller => "users", :action => "new_form" })
   #post("/create_user", { :controller => "users", :action => "create_row" })
 
   # READ
   get("/users", { :controller => "users", :action => "index" })
-  get("/users/:id_to_display", { :controller => "users", :action => "show" })
+  #get("/users/:id_to_display", { :controller => "users", :action => "show" })
 
   # UPDATE
   #get("/users/:prefill_with_id/edit", { :controller => "users", :action => "edit_form" })
@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   # DELETE
   #get("/delete_user/:id_to_remove", { :controller => "users", :action => "destroy_row" })
   
+  #get("/", { :controller => "photos", :action => "index" })
   # CREATE
   get("/comments/new", { :controller => "comments", :action => "new_form" })
   post("/create_comment", { :controller => "comments", :action => "create_row" })

@@ -56,12 +56,10 @@
         </td>
 
         <td>
-          <%= photo.image %>
+          <img src='<%= photo.image %>' />
         </td>
 
-        <td>
-          <%= photo.user_id %>
-        </td>
+    
 
         <td>
           <%= time_ago_in_words(photo.created_at) %> ago
