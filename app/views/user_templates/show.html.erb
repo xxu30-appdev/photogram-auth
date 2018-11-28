@@ -32,12 +32,23 @@
         <%= @user.id %>
       </dd>
 
+
+      <% @user.photos.each do |photo| %>
       <dt>
-        Photo
+        <%= photo.caption %>
       </dt>
       <dd>
-        <%= @user.id %>
+        <img src='<%= photo.image %>' />
       </dd>
+    
+      <% end %>
+      
+      
+      
+      
+      
+      
+      
 
       <dt>
         Created at

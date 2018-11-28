@@ -1,0 +1,20 @@
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
+
+    
+    <dl>
+  
+      <% current_user.liked_photos.each do |lp| %>
+      <dt>
+        <%= lp.caption %>
+      </dt>
+      <dd>
+        <img src='<%= lp.image %>' />
+      </dd>
+     
+      <% end %>
+      
+    </dl>
+      </div>
+</div>
+

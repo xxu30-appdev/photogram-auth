@@ -17,6 +17,6 @@ class Like < ApplicationRecord
         scope: :photo_id,
         message: "Don't be so greedy and like a photo more than once!"
     }
-    belongs_to :photos
-    belongs_to :users
+    belongs_to :photo
+    belongs_to :user
 end

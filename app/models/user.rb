@@ -26,6 +26,7 @@ class User < ApplicationRecord
 
   validates :username, :presence => true
   validates :username, :uniqueness => true
-  
+  has_many :photos, :dependent => :destroy
+  has_many :likes, :dependent => :destroy
   has_many :liked_photos, :through => :likes, :source => :photo
 end

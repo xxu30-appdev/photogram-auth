@@ -14,6 +14,11 @@
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Resources
           </a>
+          <% if current_user.blank? %>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          </div>
+            
+          <% else %>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a href="/users" class="dropdown-item">
               Users
@@ -27,11 +32,14 @@
             <a href="/photos" class="dropdown-item">
               Photos
             </a>
-            <a href="/likes" class="dropdown-item">
+            <a href="/my_likes" class="dropdown-item">
               My Likes
             </a>
-            
+            <a href="/users/<%= current_user.id %>" class="dropdown-item">
+              My Wall
+            </a>
           </div>
+          <% end %>
         </li>
       </ul>
       <ul class="navbar-nav">

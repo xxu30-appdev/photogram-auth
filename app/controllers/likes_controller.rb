@@ -16,6 +16,12 @@ class LikesController < ApplicationController
 
     render("like_templates/new_form.html.erb")
   end
+  
+  def my_likes
+    
+
+    render("like_templates/my_likes.html.erb")
+  end
 
   def create_row
     @like = Like.new
@@ -58,6 +64,6 @@ class LikesController < ApplicationController
 
     @like.destroy
 
-    redirect_to("/likes", :notice => "Like deleted successfully.")
+    redirect_to("/photos", :notice => "Like deleted successfully.")
   end
 end

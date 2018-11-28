@@ -54,6 +54,68 @@
         <td>
           <%= photo.caption %>
         </td>
+        
+        <td>
+          <%= photo.user.username %>
+        </td>
+        
+         
+     
+       <% if current_user.id == photo.user.id %>
+          <td>
+          <a href="/photos/<%= photo.id %>/edit">Edit</a>
+          <a href="/delete_photo/<%= photo.id %>">Delete</a>
+          </td>
+          <% else %>
+            <td>
+          (not your photo)
+          </td>
+          <% end %>
+        <td>
+        <% photo.comments.each do |comment| %>
+         <%= comment.body %><br />
+         <% end %>
+         </td>
+         
+         
+       <td>
+         <div class="col">
+
+        
+<% if current_user.likes.find { |l| l.id == photo.id } == nil %>
+        
+<form action="/create_like" method="post">
+<input type="hidden" value="<%= current_user.id %>" id="user_id" name="user_id" class="form-control">
+<input type="hidden" value="<%= photo.id %>" id="photo_id" name="photo_id" class="form-control">
+<button class="btn btn-block btn-outline-secondary">
+    Like
+</button>
+</form>
+<% else %>
+<a href="/delete_like/<%= current_user.likes.find { |l| l.id == photo.id }.id %>">Unlike</a>
+<% end %>
+        
+        
+        
+        
+        
+ <form action="/create_comment" method="post">
+
+    <input type="hidden" value="<%= photo.id%>" id="photo_id" name="photo_id" class="form-control">
+    <input type="hidden" value="<%= current_user.id %>" id="user_id" name="user_id" class="form-control">
+
+  <div class="form-group">
+    <input type="input" placeholder="Add a comment..." id="body" name="body" class="form-control">
+   
+  </div>
+
+  <button class="btn btn-block btn-outline-secondary">
+    Add Comment
+  </button>
+  
+</form>
+      </div>
+       </td>
 
         <td>
           <img src='<%= photo.image %>' />
@@ -73,7 +135,9 @@
             Show details
           </a>
         </td>
+        
       </tr>
+     
       <% end %>
     </table>
   </div>

@@ -9,7 +9,6 @@ Rails.application.routes.draw do
 
   # READ
   get("/users", { :controller => "users", :action => "index" })
-  #get("/users/:id_to_display", { :controller => "users", :action => "show" })
 
   # UPDATE
   #get("/users/:prefill_with_id/edit", { :controller => "users", :action => "edit_form" })
@@ -39,6 +38,7 @@ Rails.application.routes.draw do
   # Routes for the Like resource:
 
   # CREATE
+  get("/my_likes", { :controller => "likes", :action => "my_likes" })
   get("/likes/new", { :controller => "likes", :action => "new_form" })
   post("/create_like", { :controller => "likes", :action => "create_row" })
 
@@ -75,5 +75,6 @@ Rails.application.routes.draw do
   #------------------------------
 
   devise_for :users
+  get("/users/:id_to_display", { :controller => "users", :action => "show" })
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
